@@ -1,0 +1,18 @@
+// 固定底部
+.bottomBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #F7F7F6;
+  border-top: 1px solid #CDCDCD;
+
+  .tab-bar {
+    .newIcon {
+      position: relative;
+      top: -10px;
+      border-radius: 6px;
+      background-color: #ff4a58;
+    }
+  }
+}
