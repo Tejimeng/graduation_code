@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Popup } from 'antd-mobile';
-import { AppstoreOutline } from 'antd-mobile-icons';
+import { BellOutline } from 'antd-mobile-icons';
 import './index.scss';
 // 多功能按钮
 const Index = () => {
@@ -8,10 +8,10 @@ const Index = () => {
     return (
         <>
             {/* 顶部 */}
-            <div className='multi_container'>
+            <div className='clock_container'>
                 {/* 弹出层按钮 */}
-                <AppstoreOutline
-                    className='more_func'
+                <BellOutline
+                    className='clock'
                     onClick={() => {
                         setVisible(true);
                     }}
@@ -22,10 +22,10 @@ const Index = () => {
                     onMaskClick={() => {
                         setVisible(false);
                     }}
-                    position='left'
+                    position='right'
                     bodyStyle={{ width: '60vw' }}
                 >
-                    左侧弹出层的内容-胡皓辉
+                    闹钟的内容
                 </Popup>
             </div>
 

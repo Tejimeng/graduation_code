@@ -1,9 +1,11 @@
 // 路由表文件
 import { lazy } from 'react';
 //懒加载
+//pages
 const App = lazy(() => import('@/App.jsx'));
 const Home = lazy(() => import('@/pages/home/index.jsx'));
 const Classroom = lazy(() => import('@/pages/classroom/index.jsx'));
+
 //路由表
 const routes = [
     {
@@ -11,15 +13,15 @@ const routes = [
         element: <App />,
         children: [
             {
-                path: '/home',
+                path: 'home',
                 element: <Home />
             },
             {
-                path: '/classroom',
+                path: 'classroom',
                 element: <Classroom />
             },
             {
-                path: '/collection',
+                path: 'collection',
                 element: <Classroom />
             }
         ]

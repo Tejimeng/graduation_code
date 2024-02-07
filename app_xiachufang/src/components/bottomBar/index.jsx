@@ -21,7 +21,7 @@ const Index = () => {
     const navigation = useNavigate();
     const { pathname } = location;
     // 默认路由
-    const [activeKey, setActiveKey] = useState('/home');
+    const [activeKey, setActiveKey] = useState('home');
     // 路由跳转
     useEffect(() => {
         // 初次进入
@@ -36,26 +36,26 @@ const Index = () => {
     };
     const tabs = [
         {
-            key: '/home',
+            key: 'home',
             title: '首页',
             icon: <AppOutline />
         },
         {
-            key: '/classroom',
+            key: 'classroom',
             title: '课堂',
             icon: <VideoOutline />
         },
         {
-            key: '/new',
+            key: 'new',
             icon: <AddOutline className='newIcon' fontSize={42} onClick={() => setMaskVisible(true)} />
         },
         {
-            key: '/collection',
+            key: 'collection',
             title: '收藏',
             icon: active => active ? <StarFill /> : <StarOutline />
         },
         {
-            key: '/me',
+            key: 'me',
             title: '我',
             icon: <UserOutline />
         }
@@ -65,7 +65,7 @@ const Index = () => {
     return (
         <>
             <div className='bottomBar'>
-                <TabBar className='tab-bar' safeArea={true} activeKey={pathname}
+                <TabBar className='tab-bar' safeArea={true} activeKey={pathname.replace(/^\/+/, '')}
                         onChange={value => setRouteActive(value)}>
                     {tabs.map((item) => (
                         <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
