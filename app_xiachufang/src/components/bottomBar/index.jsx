@@ -30,7 +30,8 @@ const Index = () => {
         }
     }, []);
     const setRouteActive = (path) => {
-        if (path === '/new') return;
+        // 新增作为组件弹出，无需跳转
+        if (path === 'new') return;
         setActiveKey(path);
         navigation(path);
     };

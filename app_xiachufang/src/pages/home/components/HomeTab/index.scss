@@ -1,10 +1,32 @@
-.content {
-  background-color: #c21616;
-  height: 120px;
-  color: #999999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  user-select: none;
+.tab_container {
+  margin-bottom: 60px;
+  .tabs {
+    position: sticky;
+    top: 1.28rem;
+    z-index: 99;
+    background-color: #fff;
+    color: #9F9F9F;
+    font-weight: bolder;
+    height: 45px;
+    //line-height: 45px;
+    box-sizing: border-box;
+    padding: 10px 30px;
+    .tabs_info {
+      .tabs_info_item {
+        border: none;
+      }
+    }
+  }
+
+  .swiper_container {
+    .content {
+      //background-color: #c21616;
+      color: #999999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      user-select: none;
+    }
+  }
 }
