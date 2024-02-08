@@ -10,7 +10,7 @@ const Index = () => {
             <SearchBar
                 className={'search_class'}
                 icon={icon}
-                placeholder='搜索菜谱'
+                placeholder='想学点什么？'
                 style={{
                     '--border-radius': '100px',
                     '--background': '#F0F0F0',

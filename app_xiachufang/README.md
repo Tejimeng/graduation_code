@@ -10,3 +10,4 @@ bug:
     1.首页tab栏的下划线
     2.推荐card反馈mask无法弹出（现改用pop）
     3.首页tab切换时的swiper高度问题（组件自带的position）
+    4.从pages切换会首页时，需保留或跳回之前的页面
