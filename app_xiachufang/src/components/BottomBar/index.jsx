@@ -13,7 +13,7 @@ import {
     useLocation,
     useNavigate
 } from 'react-router-dom';
-import NewContent from '@/components/bottomBar/components/NewContent/index.jsx';
+import NewContent from '@/components/BottomBar/components/NewContent/index.jsx';
 
 const Index = () => {
     // 路由参数

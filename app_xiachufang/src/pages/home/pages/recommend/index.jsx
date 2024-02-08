@@ -18,6 +18,10 @@ const Index = () => {
                     <RecommendCard />
                     <RecommendCard />
                     <RecommendCard />
+                    <RecommendCard />
+                    <RecommendCard />
+                    <RecommendCard />
+                    <RecommendCard />
                 </div>
             </div>
 

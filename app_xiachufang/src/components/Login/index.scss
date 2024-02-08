@@ -1,0 +1,77 @@
+.login_container {
+  padding-top: 90px;
+  width: 365px;
+  height: 580px;
+  box-sizing: border-box;
+  position: relative;
+
+  .login_title {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    .title {
+      color: #000;
+      font-weight: bolder;
+      font-size: 28px;
+    }
+
+    .login_info {
+      margin-top: 10px;
+      .link_text {
+        color: orangered;
+      }
+    }
+  }
+
+  .login_body {
+    width: 100%;
+    margin-top: 40px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    .wechat{
+      border-radius: 7px;
+      height: 50px;
+      color: #fff;
+      background-color: #06CD66;
+      font-weight: bolder;
+      font-size: 15px;
+      border: none;
+    }
+    .phone{
+      margin-top: 10px;
+      border-radius: 7px;
+      height: 50px;
+      color: #000;
+      background-color: #EDEDED;
+      font-weight: bolder;
+      font-size: 15px;
+      border: none;
+    }
+  }
+
+  .login_footer {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    position: absolute;
+    bottom: 60px;
+    .footer_title{
+      width: 100%;
+      color: #B1B1B1;
+      text-align: center;
+      font-size: 13px;
+      font-family: "Agency FB";
+      font-weight: bold;
+    }
+    .login_choice{
+      margin: 10px auto 0;
+      width: 90%;
+      height: 60px;
+      //background-color: #373827;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+}

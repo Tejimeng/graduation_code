@@ -1,6 +1,6 @@
 import React from 'react';
 import TopBar from '@/components/TopBar/index.jsx';
-import BottomBar from '@/components/bottomBar/index.jsx';
+import BottomBar from '@/components/BottomBar/index.jsx';
 import '@/App.scss';
 import { Outlet } from 'react-router-dom';
 

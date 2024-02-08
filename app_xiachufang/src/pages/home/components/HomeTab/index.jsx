@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Tabs, Swiper } from 'antd-mobile';
 import './index.scss';
 import Recommend from '@/pages/home/pages/recommend/index.jsx';
+import Attention from '@/pages/home/pages/attention/index.jsx';
+import classNames from 'classnames';
 
 const Index = () => {
     const tabItems = [
@@ -12,8 +14,17 @@ const Index = () => {
         { key: 'classification', title: '分类' }
     ];
     // 滑块部分
-    const swiperRef = useRef(null);
+    // const swiperRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(1);
+    // 暂时的渲染函数
+    const content_render = (index) => {
+        switch (index) {
+            case 0:
+                return <div className={classNames('attention_content','content')}><Attention /></div>;
+            case 1:
+                return <div className={classNames('recommend_content','content')}><Recommend /></div>;
+        }
+    };
     return (
         <>
             <div className='tab_container'>
@@ -24,7 +35,7 @@ const Index = () => {
                         onChange={key => {
                             const index = tabItems.findIndex(item => item.key === key);
                             setActiveIndex(index);
-                            swiperRef.current?.swipeTo(index);
+                            // swiperRef.current?.swipeTo(index);
                         }}
                     >
                         {tabItems.map(item => (
@@ -32,33 +43,38 @@ const Index = () => {
                         ))}
                     </Tabs>
                 </div>
+                {/*暂时使用*/}
+                <div className='tab_content'>
+                    {content_render(activeIndex)}
+                </div>
 
-                <Swiper
-                    className={'swiper_container'}
-                    direction='horizontal'
-                    indicator={() => null}
-                    ref={swiperRef}
-                    defaultIndex={activeIndex}
-                    onIndexChange={index => {
-                        setActiveIndex(index);
-                    }}
-                >
-                    <Swiper.Item>
-                        <div className={'content'}>关注</div>
-                    </Swiper.Item>
-                    <Swiper.Item>
-                        <div className={'content'}><Recommend /></div>
-                    </Swiper.Item>
-                    <Swiper.Item>
-                        <div className={'content'}>减脂</div>
-                    </Swiper.Item>
-                    <Swiper.Item>
-                        <div className={'content'}>商店</div>
-                    </Swiper.Item>
-                    <Swiper.Item>
-                        <div className={'content'}>分类</div>
-                    </Swiper.Item>
-                </Swiper>
+                {/*因此组件利用flex实现滑动，存在bug，暂不使用*/}
+                {/*<Swiper*/}
+                {/*    className={'swiper_container'}*/}
+                {/*    direction='horizontal'*/}
+                {/*    indicator={() => null}*/}
+                {/*    ref={swiperRef}*/}
+                {/*    defaultIndex={activeIndex}*/}
+                {/*    onIndexChange={index => {*/}
+                {/*        setActiveIndex(index);*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <Swiper.Item>*/}
+                {/*        <div className={'attention_content'}><Attention/></div>*/}
+                {/*    </Swiper.Item>*/}
+                {/*    <Swiper.Item>*/}
+                {/*        <div className={'recommend_content'}><Recommend /></div>*/}
+                {/*    </Swiper.Item>*/}
+                {/*    <Swiper.Item>*/}
+                {/*        <div className={'content'}>减脂</div>*/}
+                {/*    </Swiper.Item>*/}
+                {/*    <Swiper.Item>*/}
+                {/*        <div className={'content'}>商店</div>*/}
+                {/*    </Swiper.Item>*/}
+                {/*    <Swiper.Item>*/}
+                {/*        <div className={'content'}>分类</div>*/}
+                {/*    </Swiper.Item>*/}
+                {/*</Swiper>*/}
             </div>
         </>
     );

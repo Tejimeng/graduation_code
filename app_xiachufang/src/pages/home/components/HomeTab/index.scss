@@ -1,5 +1,6 @@
 .tab_container {
   margin-bottom: 60px;
+
   .tabs {
     position: sticky;
     top: 1.28rem;
@@ -11,6 +12,7 @@
     //line-height: 45px;
     box-sizing: border-box;
     padding: 10px 30px;
+
     .tabs_info {
       .tabs_info_item {
         border: none;
@@ -18,7 +20,7 @@
     }
   }
 
-  .swiper_container {
+  .tab_content {
     .content {
       //background-color: #c21616;
       color: #999999;
@@ -28,5 +30,30 @@
       font-size: 24px;
       user-select: none;
     }
+
+    .attention_content {
+      height: 570px;
+    }
   }
+
+  //.swiper_container {
+  //  .attention_content{
+  //    color: #999999;
+  //    display: flex;
+  //    justify-content: center;
+  //    align-items: center;
+  //    font-size: 24px;
+  //    user-select: none;
+  //    height: 580px;
+  //  }
+  //  .content {
+  //    //background-color: #c21616;
+  //    color: #999999;
+  //    display: flex;
+  //    justify-content: center;
+  //    align-items: center;
+  //    font-size: 24px;
+  //    user-select: none;
+  //  }
+  //}
 }

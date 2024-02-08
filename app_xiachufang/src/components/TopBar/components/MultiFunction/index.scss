@@ -1,14 +1,13 @@
 // 顶部固定
 .multi_container {
+  box-sizing: border-box;
+  width: 1.1rem;
   height: 1.28rem;
   display: flex;
   align-items: center;
+  margin-left: 5px; /* 左边距 */
   // 多功能按钮
   .more_func {
-    //background-color: #ff4a58;
-    //position: fixed;
-    //left: 0.213rem;
-    //right: 0;
-    //top: 0.4rem;
+    font-size: 25px;
   }
 }

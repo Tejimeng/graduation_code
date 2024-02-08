@@ -2,11 +2,8 @@
   height: 1.28rem;
   display: flex;
   align-items: center;
+  margin-left: 15px; /* 左边距 */
   .clock {
-    //background-color: #ff4a58;
-    //position: fixed;
-    //left: 0.213rem;
-    //right: 0;
-    //top: 0.4rem;
+    font-size: 25px;
   }
 }
