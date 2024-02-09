@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss';
-import Login from '@/components/Login/index.jsx';
+import Login from '@/components/LoginPage/index.jsx';
 
 const Index = () => {
     return (

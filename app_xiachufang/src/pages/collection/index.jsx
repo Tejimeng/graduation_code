@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '@/components/Login/index.jsx';
+import Login from '@/components/LoginPage/index.jsx';
 import './index.scss'
 const Index = () => {
     return (

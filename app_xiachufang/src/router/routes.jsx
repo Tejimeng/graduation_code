@@ -5,8 +5,8 @@ import { lazy } from 'react';
 const App = lazy(() => import('@/App.jsx'));
 const Home = lazy(() => import('@/pages/home/index.jsx'));
 const Classroom = lazy(() => import('@/pages/classroom/index.jsx'));
-const Collection =lazy(()=>import('@/pages/collection/index.jsx'))
-const Me =lazy(()=>import('@/pages/me/index.jsx'))
+const Collection = lazy(() => import('@/pages/collection/index.jsx'));
+const Me = lazy(() => import('@/pages/me/index.jsx'));
 //路由表
 const routes = [
     {
@@ -30,7 +30,6 @@ const routes = [
                 element: <Me />
             }
         ]
-    }
-
+    },
 ];
 export default routes;

@@ -11,3 +11,6 @@ bug:
     2.推荐card反馈mask无法弹出（现改用pop）
     3.首页tab切换时的swiper高度问题（组件自带的position）
     4.从pages切换会首页时，需保留或跳回之前的页面
+目前进行：
+    1.登录流程
+    2.推荐card的details
