@@ -6,6 +6,7 @@ import VerifiCode from '@/components/LoginPage/components/Phone/VerifiCode/index
 
 const Index = ({ onClose }) => {
     const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
     const [areaCode, setAreaCode] = useState('+86');
     const [verification_code, setVerification_code] = useState(100000);
     const changeArea = () => {
@@ -23,56 +24,45 @@ const Index = ({ onClose }) => {
             content: `已向手机号码${phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')}发送验证码，请注意查收！`,
             position: 'top',
             maskClickable: false,
-            afterClose: () => {
-                // 弹窗跳转
-                setVisibleOther(true);
-            }
         });
     };
-    // pop控制
-    const [visibleOther, setVisibleOther] = useState(false);
-    // 顶部显示手机验证码，添加验证码输入框
     return (
         <>
             {/*主体登录容器*/}
-            <div className={'phone_container'}>
-                <div className='back'><LeftOutline className={'back_button'} onClick={onClose} /></div>
-                <div className='verification '>
-                    <div className='verification_title'>手机验证码登录</div>
-                    <div className='verification_body'>
-                        <div className='phone_area' onClick={changeArea}>{areaCode}&nbsp;<DownFill /></div>
+            <div className={'password_container'}>
+                <div className='password_back'><LeftOutline className={'password_back_button'} onClick={onClose} />
+                </div>
+                <div className='password '>
+                    <div className='password_title'>密码登录</div>
+                    <div className='password_body'>
+                        <div className='password_phone_area' onClick={changeArea}>{areaCode}&nbsp;<DownFill /></div>
                         <Input
                             clearable
                             type={'number'}
-                            className={'verification_input'}
+                            className={'password_phone_input'}
                             placeholder='请输入手机号码'
                             value={phone}
                             onChange={value => {
                                 setPhone(value);
                             }}
                         />
+                        <Input
+                            clearable
+                            type={'password'}
+                            className={'password_input'}
+                            placeholder='请输入密码'
+                            value={password}
+                            onChange={value => {
+                                setPassword(value);
+                            }}
+                        />
                     </div>
                     <Button disabled={!chinesePhoneNumberRegex.test(phone)}
-                            className={'verification_button'} onClick={collect}>收取验证码</Button>
+                            className={'verification_button'} onClick={collect}>登录</Button>
                     <div className='verification_footer'>登录时遇到问题</div>
                 </div>
-                <div className='password_button'>密码登录</div>
+                <div className='password_button'>验证码登录</div>
             </div>
-            {/*额外弹窗*/}
-            <Popup
-                visible={visibleOther}
-                onMaskClick={() => {
-                    setVisibleOther(false);
-                }}
-                position='right'
-                bodyStyle={{ width: '100vw' }}
-            >
-                {/*验证码组件*/}
-                <VerifiCode verification_code={verification_code} areaCode={areaCode} phone={phone} back={() => {
-                    setVisibleOther(false);
-                }} phoneClose={onClose}
-                />
-            </Popup>
         </>
     );
 };
