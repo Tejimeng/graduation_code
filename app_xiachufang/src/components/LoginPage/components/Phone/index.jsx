@@ -3,11 +3,14 @@ import './index.scss';
 import { DownFill, LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Popup, Toast } from 'antd-mobile';
 import VerifiCode from '@/components/LoginPage/components/Phone/VerifiCode/index.jsx';
+import Password from '@/components/LoginPage/components/Phone/Password/index.jsx';
 
 const Index = ({ onClose }) => {
     const [phone, setPhone] = useState('');
     const [areaCode, setAreaCode] = useState('+86');
     const [verification_code, setVerification_code] = useState(100000);
+    // 组件控制code 1为验证码组件 2为密码登录组件
+    const [componentCode, setComponentCode] = useState(0);
     const changeArea = () => {
         Toast.show({
             content: '暂只支持中国大陆用户'
@@ -25,9 +28,16 @@ const Index = ({ onClose }) => {
             maskClickable: false,
             afterClose: () => {
                 // 弹窗跳转
+                setComponentCode(1);
                 setVisibleOther(true);
             }
         });
+    };
+    // 密码登录
+    const password_login = () => {
+        // 弹窗跳转
+        setComponentCode(2);
+        setVisibleOther(true);
     };
     // pop控制
     const [visibleOther, setVisibleOther] = useState(false);
@@ -56,7 +66,7 @@ const Index = ({ onClose }) => {
                             className={'verification_button'} onClick={collect}>收取验证码</Button>
                     <div className='verification_footer'>登录时遇到问题</div>
                 </div>
-                <div className='password_button'>密码登录</div>
+                <div className='password_button' onClick={password_login}>密码登录</div>
             </div>
             {/*额外弹窗*/}
             <Popup
@@ -67,11 +77,20 @@ const Index = ({ onClose }) => {
                 position='right'
                 bodyStyle={{ width: '100vw' }}
             >
-                {/*验证码组件*/}
-                <VerifiCode verification_code={verification_code} areaCode={areaCode} phone={phone} back={() => {
-                    setVisibleOther(false);
-                }} phoneClose={onClose}
-                />
+                {componentCode === 1 ?
+                    // 验证码组件
+                    <VerifiCode verification_code={verification_code} areaCode={areaCode} phone={phone} back={() => {
+                        setComponentCode(0);
+                        setVisibleOther(false);
+                    }} phoneClose={onClose}
+                    /> :
+                    // 密码组件
+                    <Password
+                        areaCode={areaCode} back={() => {
+                        setComponentCode(0);
+                        setVisibleOther(false);
+                    }} phoneClose={onClose}
+                    />}
             </Popup>
         </>
     );
