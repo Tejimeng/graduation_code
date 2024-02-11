@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 import { LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
+import { test } from '@/api/Login/index.js';
 
 const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
     // 验证码
@@ -19,14 +20,17 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
         // });
     }, []);
     // 登录
-    const user_login = () => {
+    const user_login = async () => {
+        // 进行登录
+        const result = await test({ phone });
+        console.log(result);
         // 将之前的验证码置为空 bug
         setVerificode('');
         // 成功
         Toast.show({
             content: `登录中${verification_code}`,
             icon: 'loading',
-            duration:2000,
+            duration: 2000,
             maskClickable: false,
             afterClose: () => {
                 // 进行个人信息的存储（redux）和回显
@@ -34,9 +38,9 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
 
                 // 跳转之前的页面
                 // 关闭验证码pop
-                back();
-                // 关闭phone登录pop
-                phoneClose();
+                // back();
+                // // 关闭phone登录pop
+                // phoneClose();
             }
         });
     };

@@ -1,5 +1,10 @@
 const indexController = async (ctx) => {
-    ctx.body = '列表页---首页';
+    ctx.body = {
+        status: 'success',
+        data: 'list-test',
+        statusMessage: '验证码登录成功！',
+        statusCode: 200
+    };
 };
 
 module.exports = { indexController };
