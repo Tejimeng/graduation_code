@@ -4,4 +4,6 @@ const index = new Router();
 const { login_verification_code } = require('../../routes_handler/login/index');
 // 验证码登录
 index.post('/login', login_verification_code);
+// 密码登录
+
 module.exports = index;

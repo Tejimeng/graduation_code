@@ -4,6 +4,7 @@ const cors = require('@koa/cors');
 const { koaBody } = require('koa-body');
 const port = 9210;
 const mainRouter = require('./utils/loadRouter');
+const databaseMiddleware = require('./database/index.js');
 const notFoundMiddleware = require('./utils/notFound');
 // 跨域简易解决
 const allowedOrigins = ['http://localhost:5173']; // 允许的来源地址列表
@@ -22,6 +23,8 @@ app.use(cors({
 }));
 // 参数解析
 app.use(koaBody());
+// 连接数据库
+app.use(databaseMiddleware);
 // 路由注册
 app.use(mainRouter.routes());
 // notFound
