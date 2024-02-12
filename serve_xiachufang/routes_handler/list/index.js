@@ -2,7 +2,7 @@ const indexController = async (ctx) => {
     ctx.body = {
         status: 'success',
         data: 'list-test',
-        statusMessage: '验证码登录成功！',
+        statusMessage: 'list！',
         statusCode: 200
     };
 };

@@ -1,13 +1,5 @@
 const mysql = require('mysql2/promise');
-
-// 数据库配置
-const dbConfig = {
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'huhaohui',
-    database: 'database_xiachufang'
-};
+const {dbConfig}=require('../constant/')
 // 连接池配置
 const pool = mysql.createPool({
     host: dbConfig.host,
@@ -23,16 +15,17 @@ const databaseMiddleware = async (ctx, next) => {
     let connection;
     try {
         connection = await pool.getConnection();
+        // 数据库创建
         // console.log('Connected to database');
-        const [rows] = await connection.query(`SHOW DATABASES LIKE '${dbConfig.database}'`);
-        if (rows.length === 0) {
-            await connection.query(`CREATE DATABASE ${dbConfig.database}`);
-            // console.log('Database created');
-        } else {
-            // console.log('Database already exists');
-        }
+        // const [rows] = await connection.query(`SHOW DATABASES LIKE '${dbConfig.database}'`);
+        // if (rows.length === 0) {
+        //     await connection.query(`CREATE DATABASE ${dbConfig.database}`);
+        //     // console.log('Database created');
+        // } else {
+        //     // console.log('Database already exists');
+        // }
         // 挂载
-        ctx.db = connection;
+        ctx.db_connection = connection;
         await next();
     } catch (error) {
         console.error('Error connecting to database:', error);
@@ -40,7 +33,7 @@ const databaseMiddleware = async (ctx, next) => {
         ctx.body = 'Internal Server Error';
     } finally {
         if (connection) {
-            connection.release(); // 释放连接
+            connection.release();
         }
     }
 };

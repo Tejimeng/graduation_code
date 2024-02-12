@@ -4,6 +4,7 @@ const cors = require('@koa/cors');
 const { koaBody } = require('koa-body');
 const port = 9210;
 const mainRouter = require('./utils/loadRouter');
+const tokenVerificationMiddleware = require('./utils/tokenDetection');
 const databaseMiddleware = require('./database/index.js');
 const notFoundMiddleware = require('./utils/notFound');
 // 跨域简易解决
@@ -23,8 +24,10 @@ app.use(cors({
 }));
 // 参数解析
 app.use(koaBody());
-// 连接数据库
+// 获取数据库的连接
 app.use(databaseMiddleware);
+// token检测
+app.use(tokenVerificationMiddleware);
 // 路由注册
 app.use(mainRouter.routes());
 // notFound
