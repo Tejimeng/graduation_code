@@ -6,32 +6,34 @@ const tokenVerificationMiddleware = async (ctx, next) => {
     if (!excludePaths.includes(path)) {
         const authorizationHeader = ctx.headers.authorization;
         if (!authorizationHeader) {
-            ctx.status = 403; // 设置状态码为 403 Forbidden
+            ctx.status = 403;
             ctx.body = {
+                code: 403,
                 status: 'error',
                 error: 'Forbidden',
                 message: '您没有权限执行此操作'
             };
             return;
         }
-        const token = authorizationHeader.split(' ')[1];
-        if (!token) {
+        const accessKey = authorizationHeader.split(' ')[1];
+        if (!accessKey) {
             ctx.body = {
+                code: 403,
                 status: 'error',
                 error: 'Forbidden',
                 message: '您没有权限执行此操作'
             };
-            ctx.status = 403; // 设置状态码为 403 Forbidden
+            ctx.status = 403;
             return;
         }
         try {
-            const decoded = jwt.verify(token, secret_key, { algorithm: token_algorithm });
-            // 在这里可以根据需要将解析出的 token 存储到 ctx.state 中，以便后续路由处理函数使用
-            ctx.state.user = decoded;
+            const decoded = jwt.verify(accessKey, secret_key, { algorithm: token_algorithm });
+            ctx.state.user = decoded.account;
             await next();
         } catch (err) {
             ctx.status = 401;
             ctx.body = {
+                code: 401,
                 status: 'error',
                 error: 'Unauthorized',
                 message: 'Invalid token'

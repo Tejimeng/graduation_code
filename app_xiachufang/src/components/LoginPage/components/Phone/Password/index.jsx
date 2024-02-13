@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 import { DownFill, LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
+import { loginPassword } from '@/api/Login/index.js';
 
 const Index = ({ phoneClose, back }) => {
     const [phone, setPhone] = useState('');

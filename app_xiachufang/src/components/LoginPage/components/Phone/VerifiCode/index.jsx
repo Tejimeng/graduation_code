@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
-import { LeftOutline } from 'antd-mobile-icons';
+import { FrownFill, LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
-import { test } from '@/api/Login/index.js';
+import { loginVerificationCode } from '@/api/Login/index.js';
+import { useDispatch } from 'react-redux';
+import { setAccessKey, setAccount } from '@/store/modules/user.js';
 
 const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
+    // 仓库
+    const dispatch = useDispatch();
     // 验证码
     const [verificode, setVerificode] = useState('');
     // 挂载
@@ -22,27 +26,50 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
     // 登录
     const user_login = async () => {
         // 进行登录
-        const result = await test({ phone });
-        console.log(result);
-        // 将之前的验证码置为空 bug
-        setVerificode('');
-        // 成功
-        Toast.show({
-            content: `登录中${verification_code}`,
-            icon: 'loading',
-            duration: 2000,
-            maskClickable: false,
-            afterClose: () => {
-                // 进行个人信息的存储（redux）和回显
-
-
-                // 跳转之前的页面
-                // 关闭验证码pop
-                // back();
-                // // 关闭phone登录pop
-                // phoneClose();
+        try {
+            const result = await loginVerificationCode({ account: phone });
+            // 成功
+            if (result.status === 'success') {
+                // 将之前的验证码置为空 bug
+                setVerificode('');
+                Toast.show({
+                    content: result.message,
+                    icon: result.status,
+                    duration: 2000,
+                    maskClickable: false,
+                    afterClose: () => {
+                        // 进行个人信息的存储（redux）和回显
+                        dispatch(setAccessKey(result.data.accessKey));
+                        dispatch(setAccount(result.data.account));
+                        // 跳转之前的页面
+                        // 关闭验证码pop
+                        back();
+                        // // 关闭phone登录pop
+                        phoneClose();
+                    }
+                });
+            } else {
+                Toast.show({
+                    content: '登录出现问题，请稍后再试',
+                    duration: 1000,
+                    icon: 'fail',
+                    maskClickable: false,
+                    afterClose: () => {
+                        // 进行记录回溯
+                    }
+                });
             }
-        });
+        } catch (e) {
+            Toast.show({
+                content: '服务器开小差了，请稍等',
+                duration: 1000,
+                icon: <FrownFill />,
+                maskClickable: false,
+                afterClose: () => {
+                    // 进行记录回溯
+                }
+            });
+        }
     };
     return (
         <>
