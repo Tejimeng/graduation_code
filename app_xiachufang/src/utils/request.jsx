@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
 import { FrownFill, GlobalOutline } from 'antd-mobile-icons';
+import store from '@/store/index.js';
 
 const request = axios.create({
     baseURL: 'http://localhost:9210/xiachufang',
@@ -8,14 +9,11 @@ const request = axios.create({
 });
 // 请求拦截器
 request.interceptors.request.use((config) => {
-    // 仓库token储存，以及相关的用户信息储存
-    // let useStore=useUserStore()
-    // // token为公共参数，如果用户登录则需要携带才能发起相应的请求
-    // if (useStore.userInfo.token){
-    //     config.headers.token=useStore.userInfo.token
-    // }
-    //config:请求拦截器回调注入的对象（配置对象），配置对象的身上最终要的一件事情headers属性
-    //可以通过请求头携带公共参数-token
+    let state = store.getState();
+    let accessKey = state.user.accessKey;
+    if (accessKey) {
+        config.headers.authorization = accessKey;
+    }
     return config;
 });
 // 响应拦截器
