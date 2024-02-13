@@ -4,7 +4,7 @@ import { FrownFill, LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
 import { loginVerificationCode } from '@/api/Login/index.js';
 import { useDispatch } from 'react-redux';
-import { setAccessKey, setAccount } from '@/store/modules/user.js';
+import { setAccessKey } from '@/store/modules/user.js';
 
 const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
     // 仓库
@@ -37,10 +37,9 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
                     icon: result.status,
                     duration: 2000,
                     maskClickable: false,
-                    afterClose: () => {
+                    afterClose: async () => {
                         // 进行个人信息的存储（redux）和回显
-                        dispatch(setAccessKey(result.data.accessKey));
-                        dispatch(setAccount(result.data.account));
+                        await dispatch(setAccessKey(result.data.accessKey));
                         // 跳转之前的页面
                         // 关闭验证码pop
                         back();
@@ -56,10 +55,13 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
                     maskClickable: false,
                     afterClose: () => {
                         // 进行记录回溯
+                        back();
+                        phoneClose();
                     }
                 });
             }
         } catch (e) {
+            console.log(e);
             Toast.show({
                 content: '服务器开小差了，请稍等',
                 duration: 1000,
@@ -67,6 +69,8 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
                 maskClickable: false,
                 afterClose: () => {
                     // 进行记录回溯
+                    back();
+                    phoneClose();
                 }
             });
         }
@@ -94,6 +98,7 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
                     </div>
                     <Button disabled={!(verificode && verificode.length === 6)}
                             className={'verificode_button'} onClick={user_login}>登录</Button>
+                    <div className='tip'>未注册的用户将会直接注册</div>
                 </div>
             </div>
 

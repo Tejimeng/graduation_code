@@ -83,9 +83,9 @@ const loginPassword = async (ctx) => {
 
         if (rows.length === 0) {
             // 如果用户不存在，返回相应信息
-            ctx.status = 404;
+            ctx.status = 200;
             ctx.body = {
-                code: 404,
+                code: 200,
                 status: 'error',
                 message: '用户不存在'
             };

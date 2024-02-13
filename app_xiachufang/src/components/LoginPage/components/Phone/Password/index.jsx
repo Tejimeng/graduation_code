@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
-import { DownFill, LeftOutline } from 'antd-mobile-icons';
+import { DownFill, FrownFill, LeftOutline, SmileFill } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
 import { loginPassword } from '@/api/Login/index.js';
+import { setAccessKey } from '@/store/modules/user.js';
+import { useDispatch } from 'react-redux';
 
 const Index = ({ phoneClose, back }) => {
+    const dispatch = useDispatch();
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [areaCode, setAreaCode] = useState('+86');
@@ -21,27 +24,65 @@ const Index = ({ phoneClose, back }) => {
     // 手机正则
     const chinesePhoneNumberRegex = /^1[3456789]\d{9}$/;
     // 收取验证码
-    const collect = () => {
-        // 置空
-        setPhone('');
-        setPassword('');
-        // 在此之前进行密码登录的流程
-        Toast.show({
-            content: '正在登录中，请稍等~',
-            position: 'top',
-            duration: 2000,
-            maskClickable: false,
-            afterClose: () => {
-                // 进行个人信息的存储（redux）和回显
-
-
-                // 跳转之前的页面
-                // 关闭验证码pop
-                back();
-                // 关闭phone登录pop
-                phoneClose();
+    const collect = async () => {
+        // 进行登录
+        try {
+            const result = await loginPassword({ account: phone, password });
+            // 成功
+            if (result.status === 'success') {
+                // 置空
+                setPhone('');
+                setPassword('');
+                Toast.show({
+                    content: result.message,
+                    icon: result.status,
+                    duration: 2000,
+                    maskClickable: false,
+                    afterClose: async () => {
+                        // 进行个人信息的存储（redux）和回显
+                        await dispatch(setAccessKey(result.data.accessKey));
+                        // 跳转之前的页面
+                        // 关闭验证码pop
+                        back();
+                        // // 关闭phone登录pop
+                        phoneClose();
+                    }
+                });
+            } else if (result.code === 200 && result.message === '用户不存在') {
+                Toast.show({
+                    content: '您是新用户，请先进行注册吧',
+                    duration: 1500,
+                    icon: <SmileFill />,
+                    maskClickable: false,
+                    afterClose: () => {
+                        // 进行记录回溯
+                        back();
+                    }
+                });
+            } else {
+                Toast.show({
+                    content: '登录出现问题，请稍后再试',
+                    duration: 1000,
+                    icon: 'fail',
+                    maskClickable: false,
+                    afterClose: () => {
+                        // 进行记录回溯
+                        back();
+                        phoneClose();
+                    }
+                });
             }
-        });
+        } catch (e) {
+            Toast.show({
+                content: '服务器开小差了，请稍等',
+                duration: 1000,
+                icon: <FrownFill />,
+                maskClickable: false,
+                afterClose: () => {
+                    // 进行记录回溯
+                }
+            });
+        }
     };
     return (
         <>

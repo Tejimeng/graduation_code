@@ -28,6 +28,7 @@ const tokenVerificationMiddleware = async (ctx, next) => {
         }
         try {
             const decoded = jwt.verify(accessKey, secret_key, { algorithm: token_algorithm });
+            // 当前用户
             ctx.state.user = decoded.account;
             await next();
         } catch (err) {
