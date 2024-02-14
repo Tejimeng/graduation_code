@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Toast } from 'antd-mobile';
 import { FrownFill, GlobalOutline } from 'antd-mobile-icons';
 import store from '@/store/index.js';
+import {clearAccessKey} from '@/store/modules/user.js';
 
 const request = axios.create({
     baseURL: 'http://localhost:9210/xiachufang',
@@ -20,6 +21,16 @@ request.interceptors.response.use((response) => {
 }, (error) => {
     let status = error.response.status;
     switch (status) {
+        case 403:
+            Toast.show({
+                content: '请登录或重新登录',
+                duration: 1000,
+                icon: <FrownFill />,
+                afterClose: () => {
+                    clearAccessKey();
+                }
+            });
+            break;
         case 404:
             Toast.show({
                 content: '发生错误了，请稍后再试！',

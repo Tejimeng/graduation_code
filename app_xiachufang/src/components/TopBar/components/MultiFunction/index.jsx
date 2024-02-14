@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Popup } from 'antd-mobile';
 import { AppstoreOutline } from 'antd-mobile-icons';
 import Login from '@/components/LoginPage/index.jsx';
+import AppSet from '@/components/TopBar/components/AppSet/index.jsx';
 import './index.scss';
 // 多功能按钮
 const Index = ({ accessKey }) => {
@@ -23,7 +24,7 @@ const Index = ({ accessKey }) => {
                     position='left'
                     bodyStyle={{ width: accessKey ? '60vw' : '100vw' }}
                 >
-                    {accessKey ? (<div>左侧弹出层的内容-胡皓辉</div>) :
+                    {accessKey ? (<AppSet onClose={() => setVisible(false)} />) :
                         <Login containerTop={120} footerBottom={10} closeButtonVisible={true}
                                closeButtonFunc={() => setVisible(false)} />
                     }

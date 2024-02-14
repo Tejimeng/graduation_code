@@ -109,9 +109,9 @@ const loginPassword = async (ctx) => {
                 };
             } else {
                 // 密码不匹配，返回错误信息
-                ctx.status = 401;
+                ctx.status = 200;
                 ctx.body = {
-                    code: 401,
+                    code: 200,
                     status: 'error',
                     message: 'password error'
                 };

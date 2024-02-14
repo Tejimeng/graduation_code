@@ -32,9 +32,9 @@ const tokenVerificationMiddleware = async (ctx, next) => {
             ctx.state.user = decoded.account;
             await next();
         } catch (err) {
-            ctx.status = 401;
+            ctx.status = 403;
             ctx.body = {
-                code: 401,
+                code: 403,
                 status: 'error',
                 error: 'Unauthorized',
                 message: 'Invalid token'

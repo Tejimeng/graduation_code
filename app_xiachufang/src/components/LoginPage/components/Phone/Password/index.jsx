@@ -59,7 +59,19 @@ const Index = ({ phoneClose, back }) => {
                         back();
                     }
                 });
-            } else {
+            }else if (result.code === 200 && result.message === 'password error') {
+                Toast.show({
+                    content: '账号或密码错误',
+                    duration: 1500,
+                    icon: <FrownFill />,
+                    maskClickable: false,
+                    afterClose: () => {
+                        // 进行记录回溯
+                        // back();
+                    }
+                });
+            }
+            else {
                 Toast.show({
                     content: '登录出现问题，请稍后再试',
                     duration: 1000,
