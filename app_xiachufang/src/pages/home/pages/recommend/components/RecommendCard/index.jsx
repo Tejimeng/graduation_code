@@ -4,10 +4,11 @@ import Feedback from '@/pages/home/pages/recommend/components/RecommendCard/comp
 import './index.scss';
 import avatar from '@/assets/9b748d06a05d08c0b943b37f37e31e7.jpg';
 import { MoreOutline } from 'antd-mobile-icons';
+import RecommendDetails from '@/pages/home/pages/recommend/components/RecommendDetails/index.jsx';
 
 const Index = ({ card_cover, card_title, user_avatar, username }) => {
-    // 反馈弹窗
     const [visiblePop, setVisiblePop] = useState(false);
+    const [detailVisible, setDetailVisible] = useState(false);
     return (
         <>
             <div className={'card_container'}>
@@ -15,9 +16,13 @@ const Index = ({ card_cover, card_title, user_avatar, username }) => {
                     className={'card_content'}
                     bodyStyle={{ padding: 0 }}
                 >
-                    <div className={'card_img'}><Image className={'img'} src={card_cover || avatar}></Image></div>
-                    <p className='card_title'>{card_title || '难怪梅琳这么爱喝，真的好喝啊啊啊啊'}</p>
+                    <div onClick={() => setDetailVisible(true)} className={'card_img'}>
+                        <Image className={'img'} src={card_cover || avatar}></Image>
+                    </div>
+                    <p onClick={() => setDetailVisible(true)}
+                       className='card_title'>{card_title || '难怪梅琳这么爱喝，真的好喝啊啊啊啊'}</p>
                     <div className='card_footer'>
+                        {/*记得添加点击跳转用户的信息页面*/}
                         <div className='user_info'>
                             <Avatar className={'user_avatar'} src={user_avatar || avatar}
                                     style={{ '--size': '25px', '--border-radius': '50%' }} />
@@ -33,6 +38,10 @@ const Index = ({ card_cover, card_title, user_avatar, username }) => {
                     </div>
                 </Card>
             </div>
+            {/*detail*/}
+            <Mask color='white' style={{ zIndex: 99 }} visible={detailVisible}>
+                <RecommendDetails back={() => setDetailVisible(false)} />
+            </Mask>
             {/* 反馈弹出层 */}
             {/*<Mask color='white' style={{zIndex:99}} visible={visiblePop} onMaskClick={() => setVisiblePop(false)}>*/}
             {/*   <p>12345678</p>*/}

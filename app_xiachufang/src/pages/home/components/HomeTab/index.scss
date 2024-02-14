@@ -20,8 +20,18 @@
     }
   }
 
+  .announcement {
+    width: inherit;
+    height: 20px;
+    .announcement_content {
+      height: 20px;
+      font-size: 12px;
+    }
+  }
+
   .tab_content {
     height: inherit;
+
     .content {
     }
 

@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Tabs, Swiper } from 'antd-mobile';
+import { Tabs, Swiper, NoticeBar } from 'antd-mobile';
 import './index.scss';
 import Recommend from '@/pages/home/pages/recommend/index.jsx';
 import Attention from '@/pages/home/pages/attention/index.jsx';
 import classNames from 'classnames';
 
 const Index = () => {
+    // 告示
+    const [notice,setNotice]=useState('此应用为下厨房Alpha版，仅开放部分功能，更多功能正在开发中，尽情期待~~~')
     const tabItems = [
         { key: 'attention', title: '关注' },
         { key: 'recommend', title: '推荐' },
@@ -42,6 +44,9 @@ const Index = () => {
                             <Tabs.Tab className={'tabs_info_item'} title={item.title} key={item.key} />
                         ))}
                     </Tabs>
+                </div>
+                <div className={'announcement'}>
+                    <NoticeBar className={'announcement_content'} content={notice} color='alert' />
                 </div>
                 {/*暂时使用*/}
                 <div className='tab_content'>
