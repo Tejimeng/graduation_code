@@ -21,11 +21,12 @@
   }
 
   .tab_content {
+    height: inherit;
     .content {
     }
 
     .attention_content {
-      height: 570px;
+      height: inherit;
     }
   }
 

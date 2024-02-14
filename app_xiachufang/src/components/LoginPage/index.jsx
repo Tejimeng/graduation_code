@@ -3,8 +3,17 @@ import './index.scss';
 import { Button, Checkbox, Popup, Toast } from 'antd-mobile';
 import classNames from 'classnames';
 import Phone from '@/components/LoginPage/components/Phone/index.jsx';
+import { CloseOutline } from 'antd-mobile-icons';
 
-const Index = ({ login_title_index }) => {
+const Index = ({
+                   login_title_index = 1,
+                   closeButtonVisible = false,
+                   closeButtonFunc = () => {
+                   },
+                    outSideHeight=580,
+                   containerTop = 90,
+                   footerBottom = 50
+               }) => {
     // 登录显示的标题
     const loginTitle = {
         0: '因厨友而好玩',
@@ -27,8 +36,12 @@ const Index = ({ login_title_index }) => {
         setVisiblePhone(true);
     };
     return (
-        <div className='login_container_box'>
-            <div className={'login_container'}>
+        <div className='login_container_box' style={{height:outSideHeight+'px'}}>
+            <div className={'login_container'}
+                 style={{ paddingTop: containerTop + 'px' }}
+            >
+                {closeButtonVisible &&
+                    <div className='close_login_button' onClick={closeButtonFunc}><CloseOutline /></div>}
                 <div className='login_title'>
                     <p className={'title'}>{loginTitle[login_title_index] || '请登录'}</p>
                     <div className='login_info'>
@@ -49,7 +62,9 @@ const Index = ({ login_title_index }) => {
                         手机登录
                     </Button>
                 </div>
-                <div className='login_footer'>
+                <div className='login_footer'
+                     style={{ bottom: footerBottom + 'px' }}
+                >
                     <p className={'footer_title'}>其他登录选项</p>
                     <div className='login_choice'>
                         <svg t='1707376437191' className={classNames('icon', 'weibo')} viewBox='0 0 1024 1024'

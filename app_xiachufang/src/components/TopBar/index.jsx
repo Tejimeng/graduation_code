@@ -6,8 +6,11 @@ import ClockButton from '@/components/TopBar/components/ClockButton/index.jsx';
 import TopTitle from '@/components/TopBar/components/TopTitle/index.jsx';
 import './index.scss';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Index = () => {
+    // 获取登录状态
+    const accessKey = useSelector(state => state.user.accessKey);
     // 路由参数
     const location = useLocation();
     const { pathname } = location;
@@ -15,15 +18,15 @@ const Index = () => {
         <>
             <div className='top_container'>
                 {/*多功能按钮*/}
-                <MultiFunction />
+                <MultiFunction accessKey={accessKey} />
                 {/*    食谱搜索框*/}
                 {pathname === '/home' && <SearchButton_Recipes />}
                 {/*课堂搜索框*/}
                 {pathname === '/classroom' && <SearchButton_Class />}
                 {/*页面标题*/}
-                {(pathname === '/collection'||pathname ==='/me') && <TopTitle pathname={pathname} />}
-                {/*    右侧闹钟*/}
-                {pathname === '/home' && <ClockButton />}
+                {(pathname === '/collection' || pathname === '/me') && <TopTitle pathname={pathname} />}
+                {/*    右侧消息*/}
+                {pathname === '/home' && <ClockButton accessKey={accessKey} />}
             </div>
         </>
 

@@ -1,16 +1,29 @@
-.login_container_box{
+.login_container_box {
   display: flex;
   justify-content: center;
   align-items: center;
+  //background-color: red;
+  // 可控
+  //height: 520px;
+
   .login_container {
+    .close_login_button {
+      //background-color: #4f302c;
+      font-size: 25px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
     //background-color: #4f302c;
-    padding-top: 90px;
+    // 可控
+    //padding-top: 90px;
     width: 365px;
-    height: 580px;
+    height: inherit;
     box-sizing: border-box;
     position: relative;
     font-size: 24px;
     user-select: none;
+
     .login_title {
       width: 100%;
       box-sizing: border-box;
@@ -69,7 +82,8 @@
       box-sizing: border-box;
       padding: 0 20px;
       position: absolute;
-      bottom: 10px;
+      // 可控
+      //bottom: 10px;
 
       .footer_title {
         width: 100%;

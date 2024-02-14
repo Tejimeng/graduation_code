@@ -5,7 +5,7 @@ import Login from '@/components/LoginPage/index.jsx';
 const Index = () => {
     return (
         <div className={'attention_container'}>
-            <Login login_title_index={0}/>
+            <Login login_title_index={0} outSideHeight={450} footerBottom={10} />
         </div>
     );
 };

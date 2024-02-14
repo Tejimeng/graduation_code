@@ -5,7 +5,7 @@ export const setLocalToken = (token) => {
 };
 
 export const getLocalToken = () => {
-    return localStorage.getItem(tokenName);
+    return localStorage.getItem(tokenName)||'';
 };
 
 export const clearToken = () => {

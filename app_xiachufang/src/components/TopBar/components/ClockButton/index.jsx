@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Popup } from 'antd-mobile';
+import Login from '@/components/LoginPage/index.jsx';
 import { BellOutline } from 'antd-mobile-icons';
 import './index.scss';
 // 多功能按钮
-const Index = () => {
+const Index = ({ accessKey }) => {
     const [visible, setVisible] = useState(false);
     return (
         <>
@@ -23,9 +24,12 @@ const Index = () => {
                         setVisible(false);
                     }}
                     position='right'
-                    bodyStyle={{ width: '60vw' }}
+                    bodyStyle={{ width: '100vw' }}
                 >
-                    闹钟的内容
+                    {accessKey ? (<div>消息</div>) : (
+                        <Login containerTop={120} footerBottom={10} closeButtonVisible={true}
+                               closeButtonFunc={() => setVisible(false)} />
+                    )}
                 </Popup>
             </div>
 

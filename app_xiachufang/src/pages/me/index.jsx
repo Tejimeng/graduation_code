@@ -5,7 +5,7 @@ const Index = () => {
     return (
         <div className={'me_container'}>
            <div className='me_login'>
-               <Login login_title_index={1}/>
+               <Login  outSideHeight={500} containerTop={100} footerBottom={20}/>
            </div>
         </div>
     );

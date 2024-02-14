@@ -1,6 +1,6 @@
 // 用户子仓库
 import { createSlice } from '@reduxjs/toolkit';
-import { setLocalToken, getLocalToken, clearToken } from '@/utils/localStorage.js';
+import { setLocalToken, getLocalToken } from '@/utils/localStorage.js';
 
 const userStore = createSlice({
     name: 'user',
