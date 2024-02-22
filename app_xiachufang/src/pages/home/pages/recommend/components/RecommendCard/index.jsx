@@ -53,7 +53,7 @@ const Index = ({ card_cover, card_title, user_avatar, username }) => {
                     setVisiblePop(false);
                 }}
                 bodyStyle={{ height: '40vh', borderRadius: '15px' }}
-            >-
+            >
                 <Feedback onClose={() => setVisiblePop(false)} title={card_title || '难怪梅琳这么爱喝，真的好喝啊啊啊啊'}
                           username={username || '这是用户的名字'} />
             </Popup>
