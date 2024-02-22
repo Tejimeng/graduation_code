@@ -13,6 +13,7 @@ const Index = ({
             <div className='detail_content'>
                 详细信息
             </div>
+            <div>bottom</div>
         </div>
     );
 };

@@ -3,11 +3,16 @@ import { Tabs, Swiper, NoticeBar } from 'antd-mobile';
 import './index.scss';
 import Recommend from '@/pages/home/pages/recommend/index.jsx';
 import Attention from '@/pages/home/pages/attention/index.jsx';
+import ReduceFat from '@/pages/home/pages/reduce_fat/index.jsx';
+import Shop from '@/pages/home/pages/shop/index.jsx';
+import Classification from '@/pages/home/pages/classification/index.jsx';
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
 const Index = () => {
+    const accessKey = useSelector(state => state.user.accessKey);
     // 告示
-    const [notice,setNotice]=useState('此应用为下厨房Alpha版，仅开放部分功能，更多功能正在开发中，尽情期待~~~')
+    const [notice, setNotice] = useState('此应用为下厨房Alpha版，仅开放部分功能，更多功能正在开发中，尽情期待~~~');
     const tabItems = [
         { key: 'attention', title: '关注' },
         { key: 'recommend', title: '推荐' },
@@ -22,9 +27,15 @@ const Index = () => {
     const content_render = (index) => {
         switch (index) {
             case 0:
-                return <div className={classNames('attention_content','content')}><Attention /></div>;
+                return <div className={classNames('attention_content', 'content')}><Attention accessKey={accessKey}/></div>;
             case 1:
-                return <div className={classNames('recommend_content','content')}><Recommend /></div>;
+                return <div className={classNames('recommend_content', 'content')}><Recommend /></div>;
+            case 2:
+                return <div className={classNames('reduce_fat_content', 'content')}><ReduceFat /></div>;
+            case 3:
+                return <div className={classNames('shop_content', 'content')}><Shop /></div>;
+            case 4:
+                return <div className={classNames('classification_content', 'content')}><Classification /></div>;
         }
     };
     return (

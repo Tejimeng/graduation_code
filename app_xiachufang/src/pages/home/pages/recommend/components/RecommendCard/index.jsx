@@ -38,10 +38,11 @@ const Index = ({ card_cover, card_title, user_avatar, username }) => {
                     </div>
                 </Card>
             </div>
-            {/*detail*/}
-            <Mask color='white' style={{ zIndex: 99 }} visible={detailVisible}>
+            {/*detail弹出层*/}
+            <Popup visible={detailVisible}>
+                {/* 内容可滚动*/}
                 <RecommendDetails back={() => setDetailVisible(false)} />
-            </Mask>
+            </Popup>
             {/* 反馈弹出层 */}
             {/*<Mask color='white' style={{zIndex:99}} visible={visiblePop} onMaskClick={() => setVisiblePop(false)}>*/}
             {/*   <p>12345678</p>*/}
@@ -52,7 +53,7 @@ const Index = ({ card_cover, card_title, user_avatar, username }) => {
                     setVisiblePop(false);
                 }}
                 bodyStyle={{ height: '40vh', borderRadius: '15px' }}
-            >
+            >-
                 <Feedback onClose={() => setVisiblePop(false)} title={card_title || '难怪梅琳这么爱喝，真的好喝啊啊啊啊'}
                           username={username || '这是用户的名字'} />
             </Popup>

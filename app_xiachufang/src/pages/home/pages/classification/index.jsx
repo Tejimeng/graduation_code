@@ -3,7 +3,7 @@ import './index.scss'
 const Index = () => {
     return (
         <div>
-            这里是减脂
+            这里是分类
         </div>
     );
 };
