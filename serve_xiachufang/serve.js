@@ -8,7 +8,7 @@ const tokenVerificationMiddleware = require('./utils/tokenDetection');
 const databaseMiddleware = require('./database/index.js');
 const notFoundMiddleware = require('./utils/notFound');
 // 跨域简易解决
-const allowedOrigins = ['http://localhost:5173']; // 允许的来源地址列表
+const allowedOrigins = ['http://localhost:5173','http://127.0.0.1:5173']; // 允许的来源地址列表
 app.use(cors({
     origin: ctx => {
         const requestOrigin = ctx.request.header.origin;
