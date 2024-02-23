@@ -74,8 +74,8 @@ const Index = () => {
                 </TabBar>
             </div>
             {/* 新增蒙层 */}
-            <Mask color='white' visible={maskVisible} onMaskClick={() => setMaskVisible(false)}>
-                <NewContent />
+            <Mask color='white' visible={maskVisible} opacity={1}>
+                <NewContent setVisible={() => setMaskVisible(false)} />
             </Mask>
         </>
     );

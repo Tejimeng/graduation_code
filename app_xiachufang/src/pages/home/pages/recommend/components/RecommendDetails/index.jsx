@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import { LeftOutline } from 'antd-mobile-icons';
-import { SafeArea } from 'antd-mobile';
+import { Image, SafeArea } from 'antd-mobile';
 
 const Index = ({
                    back = () => {
@@ -12,7 +12,13 @@ const Index = ({
             <div className='back_recommend_container'><LeftOutline onClick={back} className={'back_recommend_button'} />
             </div>
             <div className='detail_content'>
-                详细信息
+                <Image className={'cover_img'}></Image>
+                <p className='detail_title'></p>
+                <div className='score'></div>
+                <div className='cookbook_author'></div>
+                <div className='materials'></div>
+                <div className='steps'></div>
+
             </div>
             <div>bottom</div>
             {/*开启安全区域，防止底部遮挡*/}

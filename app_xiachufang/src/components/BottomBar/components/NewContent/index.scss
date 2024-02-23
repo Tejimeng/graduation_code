@@ -1,0 +1,11 @@
+.new_container{
+  position: relative;
+  .new_close_button {
+    //background-color: #4f302c;
+    font-size: 25px;
+    position: absolute;
+    top: 5px;
+
+    left: 10px;
+  }
+}
