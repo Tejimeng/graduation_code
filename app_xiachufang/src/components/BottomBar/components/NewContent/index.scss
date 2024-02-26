@@ -1,11 +1,63 @@
-.new_container{
+.new_container {
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   .new_close_button {
     //background-color: #4f302c;
     font-size: 25px;
     position: absolute;
     top: 5px;
-
     left: 10px;
+  }
+  .poster_cover {
+    padding-top: 90px;
+    margin: 0 auto;
+    width: 90%;
+    box-sizing: inherit;
+  }
+  .operation_container {
+    box-sizing: inherit;
+    margin: 200px auto 0;
+    display: flex;
+    width: 90%;
+    height: 120px;
+    justify-content: space-around;
+    .operation_item {
+      box-sizing: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      height: inherit;
+      // background-color: red;
+      .icon_container {
+        box-sizing: inherit;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        .operation_icon {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .icon_container_recipe {
+        background-color: #87cddc;
+      }
+      .icon_container_work {
+        background-color: #E43224;
+      }
+      .icon_container_diet {
+        background-color: #DAEB85;
+      }
+      .title {
+        margin-top: 10px;
+        box-sizing: inherit;
+        font-size: 13px;
+        font-weight: bold;
+      }
+    }
   }
 }
