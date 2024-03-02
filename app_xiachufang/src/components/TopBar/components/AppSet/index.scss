@@ -14,11 +14,11 @@
     line-height: 25px;
     margin-top: 10px;
     //background-color: #06CD66;
-    box-sizing: inherit;
+    box-sizing: border-box;
     width: inherit;
     padding-left: 10px;
     .item_icon {
-      box-sizing: inherit;
+      box-sizing: border-box;
       width: 25px;
       height: inherit;
       display: inline-block;
@@ -32,7 +32,7 @@
       letter-spacing: 1px;
       font-weight: bold;
       line-height: 25px;
-      box-sizing: inherit;
+      box-sizing: border-box;
       display: inline-block;
     }
   }

@@ -1,14 +1,554 @@
 .recipes_detail {
-  height: 100vh;
-  overflow-y: scroll;
-  .back_recommend_container {
-    .back_recommend_button {
-
+    height: 100vh;
+    overflow-y: scroll;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    .back_recommend_container {
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        width: 100%;
+        display: flex;
+        height: 55px;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 10px;
+        transition: all 0.3s;
+        .back_navbar {
+            box-sizing: border-box;
+            margin: 5px 0 0 5px;
+            width: 30px;
+            height: 30px;
+            // color: #ccc;
+        }
+        .top_userInfo {
+            color: #000;
+            transition: all 0.3s;
+            // background-color: red;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-sizing: border-box;
+            width: 90%;
+            .author_top {
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                .author_avatar_top {
+                    box-sizing: border-box;
+                    margin-left: 1px;
+                }
+                .author_name_top {
+                    box-sizing: border-box;
+                    margin-left: 10px;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+            .attention_button_top {
+                border: none;
+                margin-right: 2px;
+                background-color: #feefec;
+                color: #ed553f;
+                font-weight: bold;
+                font-size: 12px;
+                // border-radius: 20px;
+                width: 60px;
+                height: 35px;
+            }
+        }
     }
-  }
 
-  .detail_content {
-    //background-color: red;
-    height: 1200px;
-  }
+    .detail_content {
+        // 设置底部信息的高度 关键！！！
+        min-height: 1000px;
+        width: 100%;
+        box-sizing: border-box;
+        .cover_img_container {
+            width: 100%;
+            max-height: 550px;
+            .cover_img {
+                width: 100%;
+                max-height: 550px;
+            }
+        }
+        .detail_title {
+            width: 95%;
+            margin: 15px auto 0;
+            // background-color: red;
+            box-sizing: border-box;
+            padding: 1px;
+            font-size: 19px;
+            font-weight: bold;
+        }
+        .score {
+            width: 95%;
+            margin: 15px auto 0;
+            // background-color: red;
+            box-sizing: border-box;
+            padding: 1px;
+            .score_title {
+                margin-left: 10px;
+                box-sizing: border-box;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .score_container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: 15px;
+                .score_info {
+                    display: flex;
+                    flex-direction: column;
+                    .score_number {
+                        margin-top: 5px;
+                        font-size: 30px;
+                        color: #dd3915;
+                    }
+                    .do_count {
+                        margin-top: 10px;
+                        font-size: 13px;
+                        color: #999;
+                    }
+                }
+                .score_star {
+                    // background-color: #ccc;
+                    width: 200px;
+                    // height: 33px;
+                }
+            }
+        }
+        .cookbook_author {
+            width: 95%;
+            margin: 15px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            // background-color: #ccc;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .author {
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                .author_avatar {
+                    box-sizing: border-box;
+                    margin-left: 1px;
+                }
+                .author_name {
+                    box-sizing: border-box;
+                    margin-left: 20px;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+            .attention_button {
+                border: none;
+                margin-right: 2px;
+                background-color: #feefec;
+                color: #ed553f;
+                font-weight: bold;
+                font-size: 12px;
+                // border-radius: 20px;
+                width: 60px;
+                height: 35px;
+            }
+        }
+        .materials {
+            width: 95%;
+            margin: 15px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            // background-color: #ccc;
+            .materials_top {
+                // background-color: red;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-weight: bold;
+                .materials_button {
+                    border: none;
+                    margin-right: 2px;
+                    background-color: #f6f6f6;
+                    color: #000;
+                    font-weight: bold;
+                    font-size: 12px;
+                    // border-radius: 20px;
+                    width: 60px;
+                    height: 35px;
+                }
+            }
+            .material_item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+                box-sizing: border-box;
+                font-size: 13px;
+                font-weight: bold;
+                padding-right: 13px;
+            }
+        }
+        .steps {
+            width: 95%;
+            margin: 18px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            // background-color: #ccc;
+            .step_item {
+                box-sizing: border-box;
+                margin-bottom: 20px;
+                .step_title {
+                    box-sizing: border-box;
+                    margin-top: 12px;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .step_img {
+                    margin-top: 20px;
+                    border-radius: 10px;
+                }
+                .step_desc {
+                    margin-top: 10px;
+                    p {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .tips {
+            width: 95%;
+            margin: 10px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            background-color: #f6f6f6;
+            border-radius: 13px;
+            .tips_title {
+                margin: 20px 0 0 10px;
+                box-sizing: border-box;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            .tips_content {
+                margin: 20px 0 20px 10px;
+                box-sizing: border-box;
+                font-size: 14px;
+            }
+        }
+        .last_time {
+            width: 95%;
+            margin: 10px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            font-size: 12px;
+            color: #999;
+        }
+    }
+    .advertising_container {
+        width: 95%;
+        margin: 45px auto 0;
+        box-sizing: border-box;
+        padding: 1px;
+        border: none;
+    }
+    .follow_do {
+        width: 95%;
+        margin: 30px auto 0;
+        box-sizing: border-box;
+        padding: 1px;
+        .follow_title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .follow_item {
+            margin-top: 10px;
+            background-color: #f6f6f6;
+            height: 200px;
+            border-radius: 15px;
+            box-sizing: border-box;
+            padding-top: 18px;
+            .top {
+                box-sizing: border-box;
+                // background-color: red;
+                height: 70px;
+                display: flex;
+                margin: 0 auto;
+                width: 90%;
+                justify-content: space-between;
+                align-items: center;
+                .follow_author {
+                    display: flex;
+                    box-sizing: border-box;
+                    .follow_author_avatar {
+                        margin-left: 5px;
+                    }
+                    .follow_author_avatar_info {
+                        margin-left: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        .info_item {
+                            color: #999;
+                            font-size: 13px;
+                        }
+                    }
+                }
+                .appreciate {
+                    box-sizing: border-box;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    .appreciate_icon {
+                        box-sizing: border-box;
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .appreciate_count {
+                        box-sizing: border-box;
+                        width: 30px;
+                        text-align: right;
+                        font-size: 15px;
+                        position: relative;
+                        color: #999;
+                        // bug
+                        top: 2px;
+                    }
+                }
+            }
+            .bottom {
+                box-sizing: border-box;
+                height: 100px;
+                width: 90%;
+                margin: 0 auto;
+                // background-color: red;
+                display: flex;
+                justify-content: space-between;
+                .follow_content {
+                    // background-color: #999;
+                    width: 210px;
+                    display: flex;
+                    align-items: center;
+                    height: 100%; /* 如果需要垂直居中，需要给父元素设置高度 */
+                    // text-overflow: ellipsis; /* 超出部分省略号显示 */
+                    // overflow: hidden; /* 超出部分隐藏 */
+                    font-size: 15px;
+                }
+                .follow_img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 11px;
+                }
+            }
+        }
+        .view_all {
+            width: 100%;
+            height: 60px;
+            margin: 10px auto 0;
+            box-sizing: border-box;
+            padding: 1px;
+            // border-radius: 40px;
+            background-color: #f6f6f6;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .comment_container {
+        width: 95%;
+        margin: 30px auto 50px;
+        box-sizing: border-box;
+        padding: 1px;
+        .comment_title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .comment_self {
+            height: 60px;
+            // background-color: red;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            .coment_self_icon_container {
+                box-sizing: border-box;
+                margin-left: 5px;
+                width: 40px;
+                height: 40px;
+                border: 1px solid #f4e6e6;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                .comment_self_icon {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+            .comment_self_input {
+                box-sizing: border-box;
+                padding-left: 10px;
+                margin-left: 5px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 30px;
+                background-color: #f6f6f6;
+                font-size: 14px;
+                font-weight: bold;
+                flex: 1;
+            }
+        }
+        .comment_item {
+            .comment_top {
+                box-sizing: border-box;
+                // background-color: red;
+                height: 70px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .comment_author {
+                    display: flex;
+                    box-sizing: border-box;
+                    .comment_author_avatar {
+                        margin-left: 5px;
+                    }
+                    .comment_author_avatar_info {
+                        margin-left: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        .comment_info_item {
+                            color: #999;
+                            font-size: 13px;
+                        }
+                    }
+                }
+                .comment_appreciate {
+                    box-sizing: border-box;
+                    margin-right: 3px;
+                    height: 20px;
+                    display: flex;
+                    align-items: center;
+                    .comment_appreciate_count {
+                        text-align: center;
+                        box-sizing: border-box;
+                        margin-right: 1px;
+                        width: 30px;
+                        color: #999;
+                        // background-color: #999;
+                        font-size: 15px;
+                        position: relative;
+                        // bug
+                        top: 2px;
+                    }
+                    .comment_appreciate_icon {
+                        box-sizing: border-box;
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+            .comment_desc {
+                // background-color: #999;
+                width: 72%;
+                line-height: 1.5;
+                margin: 0 auto;
+                font-size: 13px;
+                font-weight: bold;
+            }
+        }
+    }
+    .operation_bottom {
+        position: fixed;
+        z-index: 99;
+        width: 100%;
+        background-color: #fff;
+        border-top: 1px solid #f7f7f7;
+        bottom: 0;
+        box-sizing: border-box;
+        height: 40px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px 0 0;
+        .operation_item {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            // background-color: red;
+            .operation_item_icon {
+                font-size: 25px;
+            }
+            .operation_item_content {
+                margin-left: 5px;
+                box-sizing: border-box;
+                height: 30px;
+                line-height: 30px;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+// pop独立于组件，在root下
+.comment_pop {
+    .comment_info {
+        width: 100%;
+        height: 20vh;
+        box-sizing: border-box;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        .expression {
+            // background-color: red;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .expression_icon {
+                width: 30px;
+                height: 30px;
+                font-size: 25px;
+                box-sizing: border-box;
+            }
+        }
+        .comment_input_container {
+            margin-top: 13px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .comment_input {
+                background-color: #f6f6f6;
+                width: 80%;
+                height: 50px;
+                border-radius: 25px;
+                .adm-input-element {
+                    padding: 0 10px;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+            }
+            .comment_button {
+                background-color: #fa664f;
+                border: none;
+                height: 50px;
+                width: 18%;
+                color: #fff;
+                font-weight: bold;
+                font-size: 15px;
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 // 用户子仓库
 import { createSlice } from '@reduxjs/toolkit';
-import { setLocalToken, getLocalToken,clearToken } from '@/utils/localStorage.js';
+import { setLocalToken, getLocalToken, clearToken } from '@/utils/localStorage.js';
 
 const userStore = createSlice({
     name: 'user',
@@ -9,7 +9,7 @@ const userStore = createSlice({
         // 用户的个人信息
         account: '',
         username: '',
-        avatar: '',
+        avatar: 'https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
         gender: '',
         birthday: '',
         hometown: '',
@@ -36,10 +36,10 @@ const userStore = createSlice({
             state.birthday = birthday;
             state.hometown = hometown;
             state.bio = bio;
-        },
+        }
     }
 });
 //actionCreater
-const { setAccessKey, setUserProfile,clearAccessKey } = userStore.actions;
-export { setAccessKey, setUserProfile,clearAccessKey };
+const { setAccessKey, setUserProfile, clearAccessKey } = userStore.actions;
+export { setAccessKey, setUserProfile, clearAccessKey };
 export default userStore.reducer;

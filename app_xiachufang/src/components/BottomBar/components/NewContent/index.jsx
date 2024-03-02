@@ -1,18 +1,31 @@
 import React from 'react';
 import { CloseOutline } from 'antd-mobile-icons';
-import { Image } from 'antd-mobile';
+import { Image, Avatar } from 'antd-mobile';
 import posterCover from '@/assets/Snipaste_2024-02-23_15-17-48.png';
 import recipeIcon from '@/assets/recipe.svg';
 import workIcon from '@/assets/work.svg';
 import dietIcon from '@/assets/diet.svg';
+import { useSelector } from 'react-redux';
 import './index.scss';
 const Index = ({ setVisible }) => {
+    const avatar = useSelector((state) => state.user.avatar);
+    // 食谱
     const recipeFun = () => {
         console.log(1);
     };
+    // 作品
+    // 饮食
     return (
         <div className="new_container">
             <CloseOutline className="new_close_button" onClick={setVisible} color={'#999'} />
+            {avatar && (
+                <Avatar
+                    className={'my_avatar'}
+                    src={avatar}
+                    style={{ '--size': '100px', '--border-radius': '50%' }}
+                />
+            )}
+
             <Image className={'poster_cover'} src={posterCover}></Image>
             <div className="operation_container">
                 <div className="operation_item">
