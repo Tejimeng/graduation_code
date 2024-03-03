@@ -128,9 +128,9 @@ const Index = ({
             {/*pop登录*/}
             <Popup
                 visible={visiblePhone}
-                onMaskClick={() => {
-                    setVisiblePhone(false);
-                }}
+                // onMaskClick={() => {
+                //     setVisiblePhone(false);
+                // }}
                 position='right'
                 bodyStyle={{ width: '100vw' }}
             >

@@ -14,7 +14,6 @@ import {
     useNavigate
 } from 'react-router-dom';
 import NewContent from '@/components/BottomBar/components/NewContent/index.jsx';
-
 const Index = () => {
     // 路由参数
     const location = useLocation();

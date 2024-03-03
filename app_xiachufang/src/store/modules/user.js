@@ -6,6 +6,7 @@ const userStore = createSlice({
     name: 'user',
     initialState: {
         accessKey: getLocalToken() || '',
+        isLogin: !!getLocalToken(),
         // 用户的个人信息
         account: '',
         username: '',
@@ -16,15 +17,15 @@ const userStore = createSlice({
         bio: ''
     },
     reducers: {
-        setAccessKey(state, action) {
+        setUserLogin(state, action) {
             state.accessKey = action.payload;
+            state.isLogin = !!action.payload;
             setLocalToken(state.accessKey);
         },
-        clearAccessKey(state) {
-            console.log(getLocalToken());
+        setUserExit(state) {
             state.accessKey = '';
+            state.isLogin = false;
             clearToken();
-            console.log(getLocalToken());
         },
         setUserProfile(state, action) {
             // 一次性处理多个用户个人信息
@@ -39,7 +40,7 @@ const userStore = createSlice({
         }
     }
 });
-//actionCreater
-const { setAccessKey, setUserProfile, clearAccessKey } = userStore.actions;
-export { setAccessKey, setUserProfile, clearAccessKey };
+//actionCreater`
+const { setUserLogin, setUserProfile, setUserExit } = userStore.actions;
+export { setUserLogin, setUserProfile, setUserExit };
 export default userStore.reducer;

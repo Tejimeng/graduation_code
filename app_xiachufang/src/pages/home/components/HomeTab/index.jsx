@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
 const Index = () => {
-    const accessKey = useSelector(state => state.user.accessKey);
+    const isLogin = useSelector(state => state.user.isLogin);
     // 告示
     const [notice, setNotice] = useState('此应用为下厨房Alpha版，仅开放部分功能，更多功能正在开发中，尽情期待~~~');
     const tabItems = [
@@ -27,15 +27,15 @@ const Index = () => {
     const content_render = (index) => {
         switch (index) {
             case 0:
-                return <div className={classNames('attention_content', 'content')}><Attention accessKey={accessKey}/></div>;
+                return <div className={classNames('attention_content', 'content')}><Attention isLogin={isLogin}/></div>;
             case 1:
-                return <div className={classNames('recommend_content', 'content')}><Recommend /></div>;
+                return <div className={classNames('recommend_content', 'content')}><Recommend isLogin={isLogin} /></div>;
             case 2:
-                return <div className={classNames('reduce_fat_content', 'content')}><ReduceFat /></div>;
+                return <div className={classNames('reduce_fat_content', 'content')}><ReduceFat isLogin={isLogin} /></div>;
             case 3:
-                return <div className={classNames('shop_content', 'content')}><Shop /></div>;
+                return <div className={classNames('shop_content', 'content')}><Shop isLogin={isLogin} /></div>;
             case 4:
-                return <div className={classNames('classification_content', 'content')}><Classification /></div>;
+                return <div className={classNames('classification_content', 'content')}><Classification isLogin={isLogin} /></div>;
         }
     };
     return (

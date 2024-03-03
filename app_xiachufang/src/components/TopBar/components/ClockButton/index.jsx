@@ -4,7 +4,7 @@ import Login from '@/components/LoginPage/index.jsx';
 import { BellOutline } from 'antd-mobile-icons';
 import './index.scss';
 // 多功能按钮
-const Index = ({ accessKey }) => {
+const Index = ({ isLogin }) => {
     const [visible, setVisible] = useState(false);
     return (
         <>
@@ -26,7 +26,7 @@ const Index = ({ accessKey }) => {
                     position='right'
                     bodyStyle={{ width: '100vw' }}
                 >
-                    {accessKey ? (<div>消息</div>) : (
+                    {isLogin ? (<div>消息</div>) : (
                         <Login containerTop={120} footerBottom={10} closeButtonVisible={true}
                                closeButtonFunc={() => setVisible(false)} />
                     )}

@@ -4,7 +4,7 @@ import { FrownFill, LeftOutline } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
 import { loginVerificationCode } from '@/api/Login/index.js';
 import { useDispatch } from 'react-redux';
-import { setAccessKey } from '@/store/modules/user.js';
+import { setUserLogin } from '@/store/modules/user.js';
 
 const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
     // 仓库
@@ -39,7 +39,7 @@ const Index = ({ areaCode, phone, verification_code, back, phoneClose }) => {
                     maskClickable: false,
                     afterClose: async () => {
                         // 进行个人信息的存储（redux）和回显
-                        await dispatch(setAccessKey(result.data.accessKey));
+                        await dispatch(setUserLogin(result.data.accessKey));
                         // 跳转之前的页面
                         // 关闭验证码pop
                         back();

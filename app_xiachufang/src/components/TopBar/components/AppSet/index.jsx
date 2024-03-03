@@ -13,7 +13,7 @@ import img_10 from '@/assets/faxian.svg';
 import img_11 from '@/assets/shezhi.svg';
 import img_12 from '@/assets/tuichu.svg';
 import { Image, Modal, Toast } from 'antd-mobile';
-import { clearAccessKey } from '@/store/modules/user.js';
+import { setUserExit } from '@/store/modules/user.js';
 import { useDispatch } from 'react-redux';
 
 const Index = ({ onClose }) => {
@@ -75,7 +75,7 @@ const Index = ({ onClose }) => {
                         duration: 1000,
                         maskClickable: false,
                         afterClose: async () => {
-                            await dispatch(clearAccessKey());
+                            await dispatch(setUserExit());
                         }
                     });
                 }

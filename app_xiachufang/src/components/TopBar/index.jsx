@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const Index = () => {
     // 获取登录状态
-    const accessKey = useSelector(state => state.user.accessKey);
+    const isLogin = useSelector(state => state.user.isLogin);
     // 路由参数
     const location = useLocation();
     const { pathname } = location;
@@ -18,7 +18,7 @@ const Index = () => {
         <>
             <div className='top_container'>
                 {/*多功能按钮*/}
-                <MultiFunction accessKey={accessKey} />
+                <MultiFunction isLogin={isLogin} />
                 {/*    食谱搜索框*/}
                 {pathname === '/home' && <SearchButton_Recipes />}
                 {/*课堂搜索框*/}
@@ -26,7 +26,7 @@ const Index = () => {
                 {/*页面标题*/}
                 {(pathname === '/collection' || pathname === '/me') && <TopTitle pathname={pathname} />}
                 {/*    右侧消息*/}
-                {pathname === '/home' && <ClockButton accessKey={accessKey} />}
+                {pathname === '/home' && <ClockButton isLogin={isLogin} />}
             </div>
         </>
 

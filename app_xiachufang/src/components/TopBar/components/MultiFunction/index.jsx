@@ -5,7 +5,7 @@ import Login from '@/components/LoginPage/index.jsx';
 import AppSet from '@/components/TopBar/components/AppSet/index.jsx';
 import './index.scss';
 // 多功能按钮
-const Index = ({ accessKey }) => {
+const Index = ({ isLogin }) => {
     // 获取登录状态
     const [visible, setVisible] = useState(false);
     return (
@@ -22,9 +22,9 @@ const Index = ({ accessKey }) => {
                     visible={visible}
                     onMaskClick={() => setVisible(false)}
                     position='left'
-                    bodyStyle={{ width: accessKey ? '60vw' : '100vw' }}
+                    bodyStyle={{ width: isLogin ? '60vw' : '100vw' }}
                 >
-                    {accessKey ? (<AppSet onClose={() => setVisible(false)} />) :
+                    {isLogin ? (<AppSet onClose={() => setVisible(false)} />) :
                         <Login containerTop={120} footerBottom={10} closeButtonVisible={true}
                                closeButtonFunc={() => setVisible(false)} />
                     }

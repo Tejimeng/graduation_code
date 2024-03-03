@@ -3,7 +3,7 @@ import './index.scss';
 import { DownFill, FrownFill, LeftOutline, SmileFill } from 'antd-mobile-icons';
 import { Button, Input, Toast } from 'antd-mobile';
 import { loginPassword } from '@/api/Login/index.js';
-import { setAccessKey } from '@/store/modules/user.js';
+import { setUserLogin } from '@/store/modules/user.js';
 import { useDispatch } from 'react-redux';
 
 const Index = ({ phoneClose, back }) => {
@@ -40,7 +40,7 @@ const Index = ({ phoneClose, back }) => {
                     maskClickable: false,
                     afterClose: async () => {
                         // 进行个人信息的存储（redux）和回显
-                        await dispatch(setAccessKey(result.data.accessKey));
+                        await dispatch(setUserLogin(result.data.accessKey));
                         // 跳转之前的页面
                         // 关闭验证码pop
                         back();
