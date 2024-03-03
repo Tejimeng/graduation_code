@@ -19,14 +19,14 @@
     //padding-top: 90px;
     width: 365px;
     height: inherit;
-    box-sizing: border-box;
+    ;
     position: relative;
     font-size: 24px;
     user-select: none;
 
     .login_title {
       width: 100%;
-      box-sizing: border-box;
+      ;
       padding: 0 20px;
 
       .title {
@@ -52,7 +52,7 @@
     .login_body {
       width: 100%;
       margin-top: 40px;
-      box-sizing: border-box;
+      ;
       padding: 0 20px;
 
       .wechat {
@@ -79,7 +79,7 @@
 
     .login_footer {
       width: 100%;
-      box-sizing: border-box;
+      ;
       padding: 0 20px;
       position: absolute;
       // 可控
@@ -98,7 +98,7 @@
         margin: 10px auto 0;
         width: 90%;
         height: 60px;
-        box-sizing: border-box;
+        ;
         display: flex;
         justify-content: space-around;
         align-items: center;

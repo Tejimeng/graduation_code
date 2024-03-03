@@ -1,6 +1,5 @@
 .password_container {
   width: 100%;
-  box-sizing: border-box;
   height: 100%;
   position: relative;
   padding-top: 80px;
@@ -20,7 +19,7 @@
 
   .password {
     height: 400px;
-    box-sizing: border-box;
+
     width: 100%;
     padding: 60px 30px 0;
 
@@ -33,11 +32,9 @@
     .password_phone {
       margin-top: 30px;
       display: flex;
-      box-sizing: border-box;
 
       .password_phone_area {
         font-size: 20px;
-        box-sizing: border-box;
         width: 90px;
         height: 40px;
         line-height: 40px;
@@ -47,20 +44,17 @@
         width: 300px;
         height: 40px;
         line-height: 40px;
-        box-sizing: border-box;
         margin-left: 30px;
         font-size: 20px;
       }
     }
 
     .password_input_container {
-      box-sizing: border-box;
       height: 40px;
       .password_input {
         width: 400px;
         height: 40px;
         line-height: 40px;
-        box-sizing: border-box;
         font-size: 20px;
       }
     }

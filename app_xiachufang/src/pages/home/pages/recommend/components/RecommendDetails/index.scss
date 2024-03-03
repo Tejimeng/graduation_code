@@ -2,10 +2,9 @@
     height: 100vh;
     overflow-y: scroll;
     position: relative;
-    box-sizing: border-box;
     width: 100%;
     .back_recommend_container {
-        box-sizing: border-box;
+
         position: fixed;
         z-index: 99;
         top: 0;
@@ -17,7 +16,7 @@
         padding-right: 10px;
         transition: all 0.3s;
         .back_navbar {
-            box-sizing: border-box;
+
             margin: 5px 0 0 5px;
             width: 30px;
             height: 30px;
@@ -30,18 +29,18 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            box-sizing: border-box;
+
             width: 90%;
             .author_top {
-                box-sizing: border-box;
+
                 display: flex;
                 align-items: center;
                 .author_avatar_top {
-                    box-sizing: border-box;
+
                     margin-left: 1px;
                 }
                 .author_name_top {
-                    box-sizing: border-box;
+
                     margin-left: 10px;
                     font-size: 14px;
                     font-weight: bold;
@@ -65,7 +64,7 @@
         // 设置底部信息的高度 关键！！！
         min-height: 1000px;
         width: 100%;
-        box-sizing: border-box;
+
         .cover_img_container {
             width: 100%;
             max-height: 550px;
@@ -78,7 +77,7 @@
             width: 95%;
             margin: 15px auto 0;
             // background-color: red;
-            box-sizing: border-box;
+
             padding: 1px;
             font-size: 19px;
             font-weight: bold;
@@ -87,11 +86,11 @@
             width: 95%;
             margin: 15px auto 0;
             // background-color: red;
-            box-sizing: border-box;
+
             padding: 1px;
             .score_title {
                 margin-left: 10px;
-                box-sizing: border-box;
+
                 font-size: 14px;
                 font-weight: bold;
             }
@@ -124,7 +123,7 @@
         .cookbook_author {
             width: 95%;
             margin: 15px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             // background-color: #ccc;
             height: 50px;
@@ -132,15 +131,15 @@
             align-items: center;
             justify-content: space-between;
             .author {
-                box-sizing: border-box;
+
                 display: flex;
                 align-items: center;
                 .author_avatar {
-                    box-sizing: border-box;
+
                     margin-left: 1px;
                 }
                 .author_name {
-                    box-sizing: border-box;
+
                     margin-left: 20px;
                     font-size: 14px;
                     font-weight: bold;
@@ -161,7 +160,7 @@
         .materials {
             width: 95%;
             margin: 15px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             // background-color: #ccc;
             .materials_top {
@@ -170,7 +169,7 @@
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 20px;
-                box-sizing: border-box;
+
                 font-size: 16px;
                 font-weight: bold;
                 .materials_button {
@@ -190,7 +189,7 @@
                 justify-content: space-between;
                 align-items: center;
                 margin-bottom: 10px;
-                box-sizing: border-box;
+
                 font-size: 13px;
                 font-weight: bold;
                 padding-right: 13px;
@@ -199,14 +198,14 @@
         .steps {
             width: 95%;
             margin: 18px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             // background-color: #ccc;
             .step_item {
-                box-sizing: border-box;
+
                 margin-bottom: 20px;
                 .step_title {
-                    box-sizing: border-box;
+
                     margin-top: 12px;
                     font-size: 16px;
                     font-weight: bold;
@@ -226,26 +225,26 @@
         .tips {
             width: 95%;
             margin: 10px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             background-color: #f6f6f6;
             border-radius: 13px;
             .tips_title {
                 margin: 20px 0 0 10px;
-                box-sizing: border-box;
+
                 font-size: 16px;
                 font-weight: bold;
             }
             .tips_content {
                 margin: 20px 0 20px 10px;
-                box-sizing: border-box;
+
                 font-size: 14px;
             }
         }
         .last_time {
             width: 95%;
             margin: 10px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             font-size: 12px;
             color: #999;
@@ -254,14 +253,14 @@
     .advertising_container {
         width: 95%;
         margin: 45px auto 0;
-        box-sizing: border-box;
+
         padding: 1px;
         border: none;
     }
     .follow_do {
         width: 95%;
         margin: 30px auto 0;
-        box-sizing: border-box;
+
         padding: 1px;
         .follow_title {
             font-size: 16px;
@@ -273,10 +272,10 @@
             background-color: #f6f6f6;
             height: 200px;
             border-radius: 15px;
-            box-sizing: border-box;
+
             padding-top: 18px;
             .top {
-                box-sizing: border-box;
+
                 // background-color: red;
                 height: 70px;
                 display: flex;
@@ -286,7 +285,7 @@
                 align-items: center;
                 .follow_author {
                     display: flex;
-                    box-sizing: border-box;
+
                     .follow_author_avatar {
                         margin-left: 5px;
                     }
@@ -302,18 +301,18 @@
                     }
                 }
                 .appreciate {
-                    box-sizing: border-box;
+
                     height: 20px;
                     display: flex;
                     align-items: center;
                     .appreciate_icon {
-                        box-sizing: border-box;
+
                         display: inline-block;
                         width: 20px;
                         height: 20px;
                     }
                     .appreciate_count {
-                        box-sizing: border-box;
+
                         width: 30px;
                         text-align: right;
                         font-size: 15px;
@@ -325,7 +324,7 @@
                 }
             }
             .bottom {
-                box-sizing: border-box;
+
                 height: 100px;
                 width: 90%;
                 margin: 0 auto;
@@ -353,7 +352,7 @@
             width: 100%;
             height: 60px;
             margin: 10px auto 0;
-            box-sizing: border-box;
+
             padding: 1px;
             // border-radius: 40px;
             background-color: #f6f6f6;
@@ -364,7 +363,7 @@
     .comment_container {
         width: 95%;
         margin: 30px auto 50px;
-        box-sizing: border-box;
+
         padding: 1px;
         .comment_title {
             font-size: 16px;
@@ -376,9 +375,9 @@
             // background-color: red;
             display: flex;
             align-items: center;
-            box-sizing: border-box;
+
             .coment_self_icon_container {
-                box-sizing: border-box;
+
                 margin-left: 5px;
                 width: 40px;
                 height: 40px;
@@ -393,7 +392,7 @@
                 }
             }
             .comment_self_input {
-                box-sizing: border-box;
+
                 padding-left: 10px;
                 margin-left: 5px;
                 height: 40px;
@@ -407,7 +406,7 @@
         }
         .comment_item {
             .comment_top {
-                box-sizing: border-box;
+
                 // background-color: red;
                 height: 70px;
                 display: flex;
@@ -415,7 +414,7 @@
                 align-items: center;
                 .comment_author {
                     display: flex;
-                    box-sizing: border-box;
+
                     .comment_author_avatar {
                         margin-left: 5px;
                     }
@@ -431,14 +430,14 @@
                     }
                 }
                 .comment_appreciate {
-                    box-sizing: border-box;
+
                     margin-right: 3px;
                     height: 20px;
                     display: flex;
                     align-items: center;
                     .comment_appreciate_count {
                         text-align: center;
-                        box-sizing: border-box;
+
                         margin-right: 1px;
                         width: 30px;
                         color: #999;
@@ -449,7 +448,7 @@
                         top: 2px;
                     }
                     .comment_appreciate_icon {
-                        box-sizing: border-box;
+
                         display: inline-block;
                         width: 20px;
                         height: 20px;
@@ -473,7 +472,7 @@
         background-color: #fff;
         border-top: 1px solid #f7f7f7;
         bottom: 0;
-        box-sizing: border-box;
+
         height: 40px;
         display: flex;
         justify-content: space-around;
@@ -483,14 +482,14 @@
             height: 30px;
             display: flex;
             align-items: center;
-            box-sizing: border-box;
+
             // background-color: red;
             .operation_item_icon {
                 font-size: 25px;
             }
             .operation_item_content {
                 margin-left: 5px;
-                box-sizing: border-box;
+
                 height: 30px;
                 line-height: 30px;
                 font-size: 15px;
@@ -504,14 +503,14 @@
     .comment_info {
         width: 100%;
         height: 20vh;
-        box-sizing: border-box;
+
         padding: 10px;
         display: flex;
         flex-direction: column;
         .expression {
             // background-color: red;
             width: 100%;
-            box-sizing: border-box;
+
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -519,13 +518,13 @@
                 width: 30px;
                 height: 30px;
                 font-size: 25px;
-                box-sizing: border-box;
+
             }
         }
         .comment_input_container {
             margin-top: 13px;
             width: 100%;
-            box-sizing: border-box;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
