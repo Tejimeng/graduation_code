@@ -151,6 +151,12 @@ const Index = ({ card_cover, card_title, user_avatar, username, back = () => {} 
                         关注
                     </Button>
                 </div>
+                <p className="recipes_introduction">
+                    哈哈哈哈哈哈Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint,
+                    fugiat unde. Eos illo voluptatibus nisi commodi a ex voluptate dicta non fugiat
+                    cumque, suscipit ducimus rerum, dignissimos officiis temporibus.
+                    Dolorum.哈哈哈哈哈哈
+                </p>
                 <div className="materials">
                     <div className="materials_top">
                         <span>用料</span>

@@ -4,7 +4,6 @@
     position: relative;
     width: 100%;
     .back_recommend_container {
-
         position: fixed;
         z-index: 99;
         top: 0;
@@ -16,7 +15,6 @@
         padding-right: 10px;
         transition: all 0.3s;
         .back_navbar {
-
             margin: 5px 0 0 5px;
             width: 30px;
             height: 30px;
@@ -32,15 +30,12 @@
 
             width: 90%;
             .author_top {
-
                 display: flex;
                 align-items: center;
                 .author_avatar_top {
-
                     margin-left: 1px;
                 }
                 .author_name_top {
-
                     margin-left: 10px;
                     font-size: 14px;
                     font-weight: bold;
@@ -131,15 +126,12 @@
             align-items: center;
             justify-content: space-between;
             .author {
-
                 display: flex;
                 align-items: center;
                 .author_avatar {
-
                     margin-left: 1px;
                 }
                 .author_name {
-
                     margin-left: 20px;
                     font-size: 14px;
                     font-weight: bold;
@@ -156,6 +148,15 @@
                 width: 60px;
                 height: 35px;
             }
+        }
+        .recipes_introduction {
+            width: 95%;
+            margin: 15px auto 0;
+            padding: 1px;
+            // background-color: #ccc;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.5;
         }
         .materials {
             width: 95%;
@@ -192,7 +193,7 @@
 
                 font-size: 13px;
                 font-weight: bold;
-                padding-right: 13px;
+                padding:0 8px;
             }
         }
         .steps {
@@ -202,10 +203,8 @@
             padding: 1px;
             // background-color: #ccc;
             .step_item {
-
                 margin-bottom: 20px;
                 .step_title {
-
                     margin-top: 12px;
                     font-size: 16px;
                     font-weight: bold;
@@ -275,7 +274,6 @@
 
             padding-top: 18px;
             .top {
-
                 // background-color: red;
                 height: 70px;
                 display: flex;
@@ -301,18 +299,15 @@
                     }
                 }
                 .appreciate {
-
                     height: 20px;
                     display: flex;
                     align-items: center;
                     .appreciate_icon {
-
                         display: inline-block;
                         width: 20px;
                         height: 20px;
                     }
                     .appreciate_count {
-
                         width: 30px;
                         text-align: right;
                         font-size: 15px;
@@ -324,7 +319,6 @@
                 }
             }
             .bottom {
-
                 height: 100px;
                 width: 90%;
                 margin: 0 auto;
@@ -377,7 +371,6 @@
             align-items: center;
 
             .coment_self_icon_container {
-
                 margin-left: 5px;
                 width: 40px;
                 height: 40px;
@@ -392,7 +385,6 @@
                 }
             }
             .comment_self_input {
-
                 padding-left: 10px;
                 margin-left: 5px;
                 height: 40px;
@@ -406,7 +398,6 @@
         }
         .comment_item {
             .comment_top {
-
                 // background-color: red;
                 height: 70px;
                 display: flex;
@@ -430,7 +421,6 @@
                     }
                 }
                 .comment_appreciate {
-
                     margin-right: 3px;
                     height: 20px;
                     display: flex;
@@ -448,7 +438,6 @@
                         top: 2px;
                     }
                     .comment_appreciate_icon {
-
                         display: inline-block;
                         width: 20px;
                         height: 20px;
@@ -518,7 +507,6 @@
                 width: 30px;
                 height: 30px;
                 font-size: 25px;
-
             }
         }
         .comment_input_container {
