@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { CloseOutline } from 'antd-mobile-icons';
+import { CloseCircleFill, CloseOutline } from 'antd-mobile-icons';
 import {
     Button,
     ImageUploader,
@@ -14,6 +14,7 @@ import {
 } from 'antd-mobile';
 import { selectImage } from '@/utils/selectImage';
 import attentionIcon from '@/assets/attention.svg';
+
 const Index = ({ onClose }) => {
     // 图片预览
     const [coverVisible, setCoverVisible] = useState(false);
@@ -45,30 +46,38 @@ const Index = ({ onClose }) => {
             updateUploadInfo('coverImg', imageDataURL);
         });
     };
+    // 删除一个用料
+    const deleteOneMaterial = (index) => {
+        console.log(index);
+    };
+    // 表单字段
+    const formField = (changedFields, allFields) => {
+        // console.log(changedFields);
+    };
     // 表单收集
     const formValue = (changedValues, allValues) => {
-        // console.log(changedValues);
-        console.log(allValues);
+        // console.log(changedValues,changedValues.value);
+        // console.log(allValues);
     };
     const onFinish = (values) => {
-        console.log(values);
+        console.log(values, uploadInfo);
     };
     return (
         <div className={'upload_recipes'}>
-            <div className="upload_recipes_top">
-                <CloseOutline className="new_close_button" onClick={onClose} color={'#000'} />
-                <div className="buttons">
-                    <Button className="button_item" shape="rounded">
+            <div className='upload_recipes_top'>
+                <CloseOutline className='new_close_button' onClick={onClose} color={'#000'} />
+                <div className='buttons'>
+                    <Button className='button_item' shape='rounded'>
                         预览
                     </Button>
-                    <Button className="button_item" shape="rounded">
+                    <Button className='button_item' shape='rounded'>
                         存草稿
                     </Button>
                 </div>
             </div>
-            <div className="form_container">
+            <div className='form_container'>
                 <Form
-                    className="upload_form"
+                    className='upload_form'
                     // 去除form的默认样式
                     style={{
                         '--border-bottom': 'none',
@@ -76,6 +85,7 @@ const Index = ({ onClose }) => {
                         '--border-top': 'none'
                     }}
                     form={form}
+                    onFieldsChange={formField}
                     onValuesChange={formValue}
                     onFinish={onFinish}
                     initialValues={{
@@ -84,16 +94,16 @@ const Index = ({ onClose }) => {
                         recipeMaterials: [{}]
                     }}
                     footer={
-                        <Button block type="submit" color="primary" size="large">
+                        <Button block type='submit' color='primary' size='large'>
                             提交
                         </Button>
                     }
-                    layout="horizontal"
+                    layout='horizontal'
                 >
-                    <div className="upload_cover_container">
+                    <div className='upload_cover_container'>
                         {uploadInfo.coverImg ? (
                             <Image
-                                className="img_picker"
+                                className='img_picker'
                                 onClick={() => {
                                     setViewImg(uploadInfo.coverImg);
                                     setCoverVisible(true);
@@ -101,7 +111,7 @@ const Index = ({ onClose }) => {
                                 src={uploadInfo.coverImg}
                             ></Image>
                         ) : (
-                            <p className="cover_title">选择一个好看的封面吧~</p>
+                            <p className='cover_title'>选择一个好看的封面吧~</p>
                         )}
 
                         {/* <ImageUploader
@@ -115,45 +125,54 @@ const Index = ({ onClose }) => {
                             upload={mockUpload}
                             maxCount={1}
                         /> */}
-                        <Button shape="rounded" className="img_picker_button" onClick={selectCover}>
+                        <Button shape='rounded' className='img_picker_button' onClick={selectCover}>
                             {uploadInfo.coverImg ? '更换封面' : '选择封面'}
                         </Button>
                     </div>
-                    <div className="recipes_detail">
+                    <div className='recipes_detail'>
                         <Form.Item
-                            name="recipes_title"
-                            className="recipes_title"
+                            name='recipes_title'
+                            className='recipes_title'
                             rules={[{ required: true, message: '请输入食谱标题' }]}
                         >
-                            <TextArea placeholder="添加菜谱标题" showCount maxLength={25} />
+                            <TextArea placeholder='添加菜谱标题' showCount maxLength={25} />
                         </Form.Item>
-                        <Form.Item name="recipeStory" className="recipes_story">
-                            <TextArea placeholder="这道美食背后的故事" showCount maxLength={210} />
+                        <Form.Item name='recipeStory' className='recipes_story'>
+                            <TextArea placeholder='这道美食背后的故事' showCount maxLength={210} />
                         </Form.Item>
-                        <div className="materials">
-                            <div className="materials_title">
+                        {/*用料*/}
+                        <div className='materials'>
+                            <div className='materials_title'>
                                 用料
                                 <Popover
-                                    className="title_pop"
-                                    content="注意事项"
-                                    trigger="click"
-                                    placement="top"
+                                    className='title_pop'
+                                    content='注意事项'
+                                    trigger='click'
+                                    placement='top'
                                 >
-                                    <Image className="title_icon" src={attentionIcon}></Image>
+                                    <Image className='title_icon' src={attentionIcon}></Image>
                                 </Popover>
                             </div>
                             <Form.Array
-                                className="recipes_materials"
-                                name="recipeMaterials"
-                                // onAdd={(operation) => operation.add({ name: '张三' })}
-                                renderAdd={() => <span>添加</span>}
-                                // renderHeader={({ index }, { remove }) => (
-                                //     <>
-                                //         <a onClick={() => remove(index)} style={{ float: 'right' }}>
-                                //             删除
-                                //         </a>
-                                //     </>
-                                // )}
+                                className='recipes_materials'
+                                name='recipeMaterials'
+                                // onAdd={(operation) => operation.add({ materialName: '张三' })}
+                                renderAdd={() =>
+                                    // 此处点击范围太大了 后期需要调整
+                                    // <div className='addOneMaterial_container'>
+                                        <Button className={'addOneMaterial'} block shape={'rounded'}>
+                                            再增加一行
+                                        </Button>
+                                    // </div>
+                                }
+                                renderHeader={({ index }, { remove }) => (
+                                    <>
+                                        <a className={'deleteIcon'} onClick={() => remove(index)}
+                                           style={{ float: 'right' }}>
+                                            <CloseCircleFill />
+                                        </a>
+                                    </>
+                                )}
                             >
                                 {(fields) =>
                                     fields.map(({ index }) => (
@@ -161,7 +180,7 @@ const Index = ({ onClose }) => {
                                             <Grid columns={13} gap={1}>
                                                 <Grid.Item span={6}>
                                                     <Form.Item
-                                                        className="material_name"
+                                                        className='material_name'
                                                         name={[index, 'materialName']}
                                                         rules={[
                                                             {
@@ -170,12 +189,12 @@ const Index = ({ onClose }) => {
                                                             }
                                                         ]}
                                                     >
-                                                        <Input placeholder="食材：如鸡蛋" />
+                                                        <Input placeholder='食材：如鸡蛋' clearable />
                                                     </Form.Item>
                                                 </Grid.Item>
                                                 <Grid.Item span={6}>
                                                     <Form.Item
-                                                        className="material_dosage"
+                                                        className='material_dosage'
                                                         name={[index, 'materialDosage']}
                                                         rules={[
                                                             {
@@ -184,22 +203,51 @@ const Index = ({ onClose }) => {
                                                             }
                                                         ]}
                                                     >
-                                                        <Input placeholder="用量：如一枚" />
+                                                        <Input placeholder='用量：如一枚' clearable maxLength={10} />
                                                     </Form.Item>
                                                 </Grid.Item>
-                                                <Grid.Item span={1}>
-                                                    {({ index }, { remove }) => (
-                                                        <>
-                                                            <a
-                                                                onClick={() => remove(index)}
-                                                                style={{ float: 'right' }}
-                                                            >
-                                                                删除
-                                                            </a>
-                                                        </>
-                                                    )}
-                                                </Grid.Item>
                                             </Grid>
+                                        </>
+                                    ))
+                                }
+                            </Form.Array>
+                        </div>
+                        {/*步骤图*/}
+                        <div className='steps'>
+                            <div className='steps_title'>
+                                做法
+                            </div>
+                            <Form.Array
+                                className='recipes_steps'
+                                name='recipeSteps'
+                                renderAdd={() =>
+                                    <Button className={'addOneSteps'} block shape={'rounded'}>
+                                        加一步
+                                    </Button>
+                                }
+                                renderHeader={({ index }, { remove }) => (
+                                    <>
+                                        <span>步骤&nbsp;{index + 1}</span>
+                                        <a className={'deleteIcon'} onClick={() => remove(index)}
+                                           style={{ float: 'right' }}>
+                                            <CloseCircleFill />
+                                        </a>
+                                    </>
+                                )}
+                            >
+                                {(fields) =>
+                                    fields.map(({ index }) => (
+                                        <>
+                                            <Form.Item
+                                                name={[index, 'step_img']}
+                                                label='姓名'
+                                                rules={[{ required: true, message: '姓名不能为空' }]}
+                                            >
+                                                <Input placeholder='请输入姓名' />
+                                            </Form.Item>
+                                            <Form.Item name={[index, 'step_desc']} label='地址'>
+                                                <Input placeholder='请输入地址' />
+                                            </Form.Item>
                                         </>
                                     ))
                                 }
