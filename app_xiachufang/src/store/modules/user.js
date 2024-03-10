@@ -10,7 +10,7 @@ const userStore = createSlice({
         // 用户的个人信息
         account: '',
         username: '',
-        avatar: 'https://images.unsplash.com/photo-1548532928-b34e3be62fc6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ',
+        avatar: 'https://s11.ax1x.com/2023/06/09/pCEADYt.jpg',
         gender: '',
         birthday: '',
         hometown: '',

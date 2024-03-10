@@ -1,6 +1,8 @@
 const Koa = require('koa');
 const app = new Koa();
 const cors = require('@koa/cors');
+const path = require('path');
+const koaStatic = require('koa-static');
 const { koaBody } = require('koa-body');
 const port = 9210;
 const mainRouter = require('./utils/loadRouter');
@@ -22,6 +24,9 @@ app.use(cors({
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type']
 }));
+// 设置静态资源文件夹
+const staticPath = './public';
+app.use(koaStatic(path.join(__dirname, staticPath)));
 // 参数解析
 app.use(koaBody());
 // 获取数据库的连接

@@ -20,10 +20,14 @@ const Index = ({ onClose }) => {
     const [coverVisible, setCoverVisible] = useState(false);
     const [viewImg, setViewImg] = useState('');
     const [form] = Form.useForm();
-    const testImg =
+    // 上传图片相关   const testImg =
         'https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60';
     const [fileList, setFileList] = useState([]);
-    const mockUpload = (file) => {
+    // 图片上传函数 在这里进行url的返回
+    const mockUpload = async (file) => {
+        // 等待上传的时间
+        // await sleep(3000)
+        console.log(URL.createObjectURL(file));
         return {
             url: URL.createObjectURL(file)
         };
@@ -160,9 +164,9 @@ const Index = ({ onClose }) => {
                                 renderAdd={() =>
                                     // 此处点击范围太大了 后期需要调整
                                     // <div className='addOneMaterial_container'>
-                                        <Button className={'addOneMaterial'} block shape={'rounded'}>
-                                            再增加一行
-                                        </Button>
+                                    <Button className={'addOneMaterial'} block shape={'rounded'}>
+                                        再增加一行
+                                    </Button>
                                     // </div>
                                 }
                                 renderHeader={({ index }, { remove }) => (
@@ -240,13 +244,18 @@ const Index = ({ onClose }) => {
                                         <>
                                             <Form.Item
                                                 name={[index, 'step_img']}
-                                                label='姓名'
-                                                rules={[{ required: true, message: '姓名不能为空' }]}
+                                                rules={[{ required: true, message: '请选择步骤图片' }]}
                                             >
-                                                <Input placeholder='请输入姓名' />
+                                                <ImageUploader
+                                                    style={{ '--cell-size': '90px' }}
+                                                    value={fileList}
+                                                    onChange={setFileList}
+                                                    upload={mockUpload}
+                                                />
                                             </Form.Item>
-                                            <Form.Item name={[index, 'step_desc']} label='地址'>
-                                                <Input placeholder='请输入地址' />
+                                            <Form.Item name={[index, 'step_desc']}
+                                                       rules={[{ required: true, message: '请输入步骤的描述' }]}>
+                                                <TextArea placeholder='添加步骤的描述' />
                                             </Form.Item>
                                         </>
                                     ))
