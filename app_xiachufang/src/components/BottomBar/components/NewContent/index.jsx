@@ -61,7 +61,8 @@ const Index = ({ setVisible }) => {
                 {isLogin ?
                     (
                         componentIndex === 1 ?
-                            <UploadRecipes onClose={() => setNewVisible(false)} /> :
+                            // 暂时使用key来强制重新渲染
+                            <UploadRecipes key={Date.now()} onClose={() => setNewVisible(false)} /> :
                             (componentIndex === 2 ?
                                     <div>222</div> :
                                     null

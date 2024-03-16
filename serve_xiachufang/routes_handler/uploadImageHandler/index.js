@@ -27,7 +27,7 @@ const createFolder = (folderPath) => {
 };
 
 // 获取项目根目录
-const rootPath = path.join(__dirname, '..', '..', 'public', 'serverImage');
+const rootPath = path.join(__dirname, '..', '..', 'static', 'serverImage');
 
 // 获取文件夹路径函数
 const getFolderPath = () => {
@@ -36,20 +36,27 @@ const getFolderPath = () => {
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
     const day = ('0' + currentDate.getDate()).slice(-2);
 
-    return path.join('public', 'serverImage', year, month, day);
+    return path.join('static', 'serverImage', year, month, day);
 };
 
-const uploadImageHandler = async (ctx, next) => {
+// 处理上传多个图片文件
+const uploadMultipleImagesHandler = async (ctx, next) => {
+    // console.log('触发了图片上传的函数');
     try {
-        await upload.single('image')(ctx, next); // 传递 ctx 和 next 参数
-        const fileName = path.relative(rootPath, ctx.file.path).replace(/\\/g, '/');
-        const imageUrl = `http://localhost:9210/public/serverImage/${fileName}`;
-
+        await upload.array('images')(ctx, next); // 传递 ctx 和 next 参数
+        const fileUrls = ctx.files.map((file) => {
+            const fileName = path.relative(rootPath, file.path).replace(/\\/g, '/');
+            return `http://localhost:9210/serverImage/${fileName}`;
+        });
+        ctx.status = 200;
         ctx.body = {
-            imageUrl
+            imageUrls: fileUrls,
+            code: 200,
+            status: 'success',
+            message: '上传成功'
         };
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         ctx.status = 500;
         ctx.body = {
             error: 'File upload failed',
@@ -60,4 +67,4 @@ const uploadImageHandler = async (ctx, next) => {
     }
 };
 
-module.exports = uploadImageHandler;
+module.exports = uploadMultipleImagesHandler;

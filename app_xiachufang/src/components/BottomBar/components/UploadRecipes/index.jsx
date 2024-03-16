@@ -10,26 +10,52 @@ import {
     TextArea,
     Image,
     ImageViewer,
-    Grid
+    Grid,
+    Dialog
 } from 'antd-mobile';
-import { selectImage } from '@/utils/selectImage';
+// 选择图片
+// import { selectImage } from '@/utils/selectImage';
 import attentionIcon from '@/assets/attention.svg';
-
+import { useRef } from 'react';
+import { uploadImage } from '@/api/Upload';
 const Index = ({ onClose }) => {
     // 图片预览
-    const [coverVisible, setCoverVisible] = useState(false);
-    const [viewImg, setViewImg] = useState('');
+    // const [coverVisible, setCoverVisible] = useState(false);
+    // const [viewImg, setViewImg] = useState('');
+    // 封面
+    const [hasCover, setHasCover] = useState(false);
+    const coverRef = useRef(null);
+    // 表单
     const [form] = Form.useForm();
-    // 上传图片相关   const testImg =
-        'https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60';
     const [fileList, setFileList] = useState([]);
     // 图片上传函数 在这里进行url的返回
-    const mockUpload = async (file) => {
+    const mockUpload = async (file, uploadType = 0) => {
+        // // 单张上传
+        // if (uploadType === 1) {
+        //     formData.append('images', fileList);
+        //     let uploadData = await uploadImage(formData);
+        //     return {
+        //         url: uploadData?.imageUrls
+        //     };
+        // }
+        // // 多张上传
+        // if (uploadData === 2) {
+        //     formData.append('images', fileList);
+        //     let uploadData = await uploadImage(formData);
+        //     return {
+        //         url: uploadData?.imageUrls
+        //     };
+        // }
+        let formData = new FormData();
+        formData.append('images', file);
+        let uploadData = await uploadImage(formData);
         // 等待上传的时间
-        // await sleep(3000)
-        console.log(URL.createObjectURL(file));
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // 等待2秒
+        console.log('file :>> ', uploadData?.imageUrls);
+        // 前端暂存图片 后端直接返回url
         return {
-            url: URL.createObjectURL(file)
+            // url: URL.createObjectURL(file)
+            url: uploadData?.imageUrls[0]
         };
     };
     // 上传的信息
@@ -37,22 +63,12 @@ const Index = ({ onClose }) => {
         coverImg: '',
         recipeTitle: '',
         recipeStory: '',
-        recipeMaterials: {}
+        recipeMaterials: {},
+        recipeSteps: {}
     });
     // 更新
     const updateUploadInfo = (paramName, value) => {
         setUploadInfo({ ...uploadInfo, [paramName]: value });
-    };
-
-    // 选择封面
-    const selectCover = () => {
-        selectImage((imageDataURL) => {
-            updateUploadInfo('coverImg', imageDataURL);
-        });
-    };
-    // 删除一个用料
-    const deleteOneMaterial = (index) => {
-        console.log(index);
     };
     // 表单字段
     const formField = (changedFields, allFields) => {
@@ -60,28 +76,29 @@ const Index = ({ onClose }) => {
     };
     // 表单收集
     const formValue = (changedValues, allValues) => {
-        // console.log(changedValues,changedValues.value);
+        // console.log(changedValues);
+        // console.log(getFieldValue('recipes_cover')?.length);
         // console.log(allValues);
     };
     const onFinish = (values) => {
-        console.log(values, uploadInfo);
+        // console.log(values);
     };
     return (
         <div className={'upload_recipes'}>
-            <div className='upload_recipes_top'>
-                <CloseOutline className='new_close_button' onClick={onClose} color={'#000'} />
-                <div className='buttons'>
-                    <Button className='button_item' shape='rounded'>
+            <div className="upload_recipes_top">
+                <CloseOutline className="new_close_button" onClick={onClose} color={'#000'} />
+                <div className="buttons">
+                    <Button className="button_item" shape="rounded">
                         预览
                     </Button>
-                    <Button className='button_item' shape='rounded'>
+                    <Button className="button_item" shape="rounded">
                         存草稿
                     </Button>
                 </div>
             </div>
-            <div className='form_container'>
+            <div className="form_container">
                 <Form
-                    className='upload_form'
+                    className="upload_form"
                     // 去除form的默认样式
                     style={{
                         '--border-bottom': 'none',
@@ -98,81 +115,125 @@ const Index = ({ onClose }) => {
                         recipeMaterials: [{}]
                     }}
                     footer={
-                        <Button block type='submit' color='primary' size='large'>
+                        <Button block type="submit" color="primary" size="large">
                             提交
                         </Button>
                     }
-                    layout='horizontal'
                 >
-                    <div className='upload_cover_container'>
-                        {uploadInfo.coverImg ? (
-                            <Image
-                                className='img_picker'
-                                onClick={() => {
-                                    setViewImg(uploadInfo.coverImg);
-                                    setCoverVisible(true);
-                                }}
-                                src={uploadInfo.coverImg}
-                            ></Image>
+                    <div className="upload_cover_container">
+                        {/* {hasCover ? (
+                            <>
+                                <Image
+                                    className="img_picker"
+                                    onClick={() => {
+                                        setViewImg(uploadInfo.coverImg);
+                                        setCoverVisible(true);
+                                    }}
+                                    src={uploadInfo.coverImg}
+                                ></Image>
+                                <Form.Item
+                                    name="recipes_cover"
+                                    className="recipes_cover"
+                                    rules={[{ required: true, message: '请选择食谱封面' }]}
+                                    style={{
+                                        display: 'none'
+                                    }}
+                                >
+                                    <ImageUploader
+                                        ref={coverRef}
+                                        className="img_picker"
+                                        style={{ '--cell-size': '350px' }}
+                                        value={fileList}
+                                        onChange={() => {
+                                            setFileList;
+                                        }}
+                                        // upload={mockUpload}
+                                        maxCount={1}
+                                    />
+                                </Form.Item>
+                            </>
                         ) : (
-                            <p className='cover_title'>选择一个好看的封面吧~</p>
+                            <p className="cover_title">选择一个好看的封面吧~</p>
                         )}
 
-                        {/* <ImageUploader
-                            className="img_picker"
-                            style={{ '--cell-size': '90px' }}
-                            value={fileList}
-                            onChange={() => {
-                                setFileList;
-                                console.log(fileList);
-                            }}
-                            upload={mockUpload}
-                            maxCount={1}
-                        /> */}
-                        <Button shape='rounded' className='img_picker_button' onClick={selectCover}>
-                            {uploadInfo.coverImg ? '更换封面' : '选择封面'}
+                        <Button shape="rounded" className="img_picker_button" onClick={selectCover}>
+                            {hasCover ? '更换封面' : '选择封面'}
+                        </Button> */}
+                        <Form.Item
+                            name="recipes_cover"
+                            className="recipes_cover"
+                            rules={[{ required: true, message: '请选择食谱封面' }]}
+                        >
+                            <ImageUploader
+                                ref={coverRef}
+                                className="img_picker"
+                                style={{ '--cell-size': '345px' }}
+                                value={fileList}
+                                onChange={() => {
+                                    setFileList;
+                                }}
+                                upload={mockUpload}
+                                maxCount={1}
+                                onDelete={() => {
+                                    return Dialog.confirm({
+                                        content: '是否确认删除'
+                                    });
+                                }}
+                            />
+                        </Form.Item>
+                        <Button shape="rounded" className="img_picker_button">
+                            封面图
                         </Button>
                     </div>
-                    <div className='recipes_detail'>
+                    <div className="recipes_detail">
                         <Form.Item
-                            name='recipes_title'
-                            className='recipes_title'
+                            name="recipes_title"
+                            className="recipes_title"
                             rules={[{ required: true, message: '请输入食谱标题' }]}
                         >
-                            <TextArea placeholder='添加菜谱标题' showCount maxLength={25} />
+                            <TextArea placeholder="添加菜谱标题" showCount maxLength={25} />
                         </Form.Item>
-                        <Form.Item name='recipeStory' className='recipes_story'>
-                            <TextArea placeholder='这道美食背后的故事' showCount maxLength={210} />
+                        <Form.Item name="recipeStory" className="recipes_story">
+                            <TextArea placeholder="这道美食背后的故事" showCount maxLength={210} />
                         </Form.Item>
                         {/*用料*/}
-                        <div className='materials'>
-                            <div className='materials_title'>
+                        <div className="materials">
+                            <div className="materials_title">
                                 用料
                                 <Popover
-                                    className='title_pop'
-                                    content='注意事项'
-                                    trigger='click'
-                                    placement='top'
+                                    className="title_pop"
+                                    content="注意事项"
+                                    trigger="click"
+                                    placement="top"
                                 >
-                                    <Image className='title_icon' src={attentionIcon}></Image>
+                                    <Image className="title_icon" src={attentionIcon}></Image>
                                 </Popover>
                             </div>
                             <Form.Array
-                                className='recipes_materials'
-                                name='recipeMaterials'
+                                className="recipes_materials"
+                                name="recipeMaterials"
                                 // onAdd={(operation) => operation.add({ materialName: '张三' })}
-                                renderAdd={() =>
-                                    // 此处点击范围太大了 后期需要调整
-                                    // <div className='addOneMaterial_container'>
-                                    <Button className={'addOneMaterial'} block shape={'rounded'}>
-                                        再增加一行
-                                    </Button>
+                                renderAdd={
+                                    () => (
+                                        // 此处点击范围太大了 后期需要调整
+                                        // <div className='addOneMaterial_container'>
+                                        <Button
+                                            className={'addOneMaterial'}
+                                            block
+                                            shape={'rounded'}
+                                        >
+                                            再增加一行
+                                        </Button>
+                                    )
                                     // </div>
                                 }
                                 renderHeader={({ index }, { remove }) => (
                                     <>
-                                        <a className={'deleteIcon'} onClick={() => remove(index)}
-                                           style={{ float: 'right' }}>
+                                        <a
+                                            className={'deleteIcon'}
+                                            onClick={() => remove(index)}
+                                            style={{ float: 'right' }}
+                                        >
                                             <CloseCircleFill />
                                         </a>
                                     </>
@@ -184,7 +245,7 @@ const Index = ({ onClose }) => {
                                             <Grid columns={13} gap={1}>
                                                 <Grid.Item span={6}>
                                                     <Form.Item
-                                                        className='material_name'
+                                                        className="material_name"
                                                         name={[index, 'materialName']}
                                                         rules={[
                                                             {
@@ -193,12 +254,15 @@ const Index = ({ onClose }) => {
                                                             }
                                                         ]}
                                                     >
-                                                        <Input placeholder='食材：如鸡蛋' clearable />
+                                                        <Input
+                                                            placeholder="食材：如鸡蛋"
+                                                            clearable
+                                                        />
                                                     </Form.Item>
                                                 </Grid.Item>
                                                 <Grid.Item span={6}>
                                                     <Form.Item
-                                                        className='material_dosage'
+                                                        className="material_dosage"
                                                         name={[index, 'materialDosage']}
                                                         rules={[
                                                             {
@@ -207,7 +271,11 @@ const Index = ({ onClose }) => {
                                                             }
                                                         ]}
                                                     >
-                                                        <Input placeholder='用量：如一枚' clearable maxLength={10} />
+                                                        <Input
+                                                            placeholder="用量：如一枚"
+                                                            clearable
+                                                            maxLength={10}
+                                                        />
                                                     </Form.Item>
                                                 </Grid.Item>
                                             </Grid>
@@ -217,23 +285,24 @@ const Index = ({ onClose }) => {
                             </Form.Array>
                         </div>
                         {/*步骤图*/}
-                        <div className='steps'>
-                            <div className='steps_title'>
-                                做法
-                            </div>
+                        <div className="steps">
+                            <div className="steps_title">做法</div>
                             <Form.Array
-                                className='recipes_steps'
-                                name='recipeSteps'
-                                renderAdd={() =>
+                                className="recipes_steps"
+                                name="recipeSteps"
+                                renderAdd={() => (
                                     <Button className={'addOneSteps'} block shape={'rounded'}>
                                         加一步
                                     </Button>
-                                }
+                                )}
                                 renderHeader={({ index }, { remove }) => (
                                     <>
                                         <span>步骤&nbsp;{index + 1}</span>
-                                        <a className={'deleteIcon'} onClick={() => remove(index)}
-                                           style={{ float: 'right' }}>
+                                        <a
+                                            className={'deleteIcon'}
+                                            onClick={() => remove(index)}
+                                            style={{ float: 'right' }}
+                                        >
                                             <CloseCircleFill />
                                         </a>
                                     </>
@@ -243,19 +312,33 @@ const Index = ({ onClose }) => {
                                     fields.map(({ index }) => (
                                         <>
                                             <Form.Item
-                                                name={[index, 'step_img']}
-                                                rules={[{ required: true, message: '请选择步骤图片' }]}
+                                                className="material_name"
+                                                name={[index, 'stepImg']}
+                                                rules={[
+                                                    { required: true, message: '请选择步骤图片' }
+                                                ]}
                                             >
                                                 <ImageUploader
-                                                    style={{ '--cell-size': '90px' }}
+                                                    maxCount={1}
+                                                    style={{ '--cell-size': '315px' }}
                                                     value={fileList}
                                                     onChange={setFileList}
                                                     upload={mockUpload}
+                                                    onDelete={() => {
+                                                        return Dialog.confirm({
+                                                            content: '是否确认删除'
+                                                        });
+                                                    }}
                                                 />
                                             </Form.Item>
-                                            <Form.Item name={[index, 'step_desc']}
-                                                       rules={[{ required: true, message: '请输入步骤的描述' }]}>
-                                                <TextArea placeholder='添加步骤的描述' />
+                                            <Form.Item
+                                                className="step_desc"
+                                                name={[index, 'stepDesc']}
+                                                rules={[
+                                                    { required: true, message: '请输入步骤的描述' }
+                                                ]}
+                                            >
+                                                <TextArea placeholder="添加步骤的描述" />
                                             </Form.Item>
                                         </>
                                     ))
@@ -266,7 +349,7 @@ const Index = ({ onClose }) => {
                 </Form>
             </div>
             {/* 图片查看 */}
-            <ImageViewer
+            {/* <ImageViewer
                 // classNames={{
                 //     mask: 'customize-mask',
                 //     body: 'customize-body'
@@ -276,7 +359,7 @@ const Index = ({ onClose }) => {
                 onClose={() => {
                     setCoverVisible(false);
                 }}
-            />
+            /> */}
         </div>
     );
 };
