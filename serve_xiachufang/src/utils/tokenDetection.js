@@ -2,8 +2,13 @@ const jwt = require('jsonwebtoken');
 const { secret_key, token_algorithm } = require('../constant/token.js');
 const { excludePaths } = require('../constant/routes.js');
 const tokenVerificationMiddleware = async (ctx, next) => {
-    const path = ctx.request.path.replace(/^\/[^\/]*/, ''); // 去除路径前缀chufang
-    // console.log(path);
+    // 图片资源特殊处理 没有存储服务器 如果路径以 /static/serverImage/ 开头，则直接跳过权限校验和前缀去除
+    if (ctx.request.path.startsWith('/static/serverImage/')) {
+        console.log(ctx.request.path);
+        await next();
+        return;
+    }
+    const path = ctx.request.path.replace(/^\/[^\/]*/, ''); // 去除路径前缀xiachufang
     if (!excludePaths.includes(path)) {
         const authorizationHeader = ctx.headers.authorization;
         if (!authorizationHeader) {

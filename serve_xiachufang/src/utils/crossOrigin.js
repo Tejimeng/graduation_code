@@ -6,12 +6,8 @@ const crossOriginMiddleware = () => {
     return cors({
         origin: (ctx) => {
             const requestOrigin = ctx.request.header.origin;
-            // console.log('请求头url：', ctx.request.header);
             if (allowedOrigins.includes(requestOrigin)) {
                 return requestOrigin;
-            }
-            if (ctx.url.startsWith('serverImage/')) {
-                return '*';
             }
             // 其他情况返回 403 状态码和错误信息
             ctx.status = 403;

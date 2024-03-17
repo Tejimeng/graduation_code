@@ -6,15 +6,11 @@ const { koaBody } = require('koa-body');
 const port = 9210;
 const mainRouter = require('./utils/loadRouter.js');
 const tokenVerificationMiddleware = require('./utils/tokenDetection.js');
-const databaseMiddleware = require('./database/index.js');
+const databaseMiddleware = require('./config/database');
 const crossOriginMiddleware = require('./utils/crossOrigin.js');
-// const imageContentTypeMiddleware = require('./utils/imageContentTypeMiddleware');
 const notFoundMiddleware = require('./utils/notFound');
 
-// 配置静态资源服务器的返回类型  koa-static自带不需要手动设置
-// app.use(imageContentTypeMiddleware);
-
-app.use(koaStatic(path.join(__dirname, 'static')));
+app.use(koaStatic(path.join(__dirname, '../static')));
 app.use(koaBody());
 app.use(databaseMiddleware);
 app.use(crossOriginMiddleware());

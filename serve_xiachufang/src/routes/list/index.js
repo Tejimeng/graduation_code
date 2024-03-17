@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const index = new Router();
 // 路由处理函数
-const { indexController } = require('../../routes_handler/list/index');
+const { indexController } = require('../../routes_handler/list');
 // 注册
 index.get('/list', indexController);
 // 重定向

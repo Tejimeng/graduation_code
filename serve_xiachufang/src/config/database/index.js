@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const { dbConfig } = require('../constant/database.js');
+const { dbConfig } = require('../../constant/database.js');
 // 连接池配置
 const pool = mysql.createPool({
     host: dbConfig.host,
