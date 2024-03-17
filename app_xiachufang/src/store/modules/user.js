@@ -23,6 +23,7 @@ const userStore = createSlice({
             setLocalToken(state.accessKey);
         },
         setUserExit(state) {
+            console.log('用户退出了');
             state.accessKey = '';
             state.isLogin = false;
             clearToken();

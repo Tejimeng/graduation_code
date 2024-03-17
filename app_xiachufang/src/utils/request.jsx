@@ -2,7 +2,8 @@ import axios from 'axios';
 import { Toast } from 'antd-mobile';
 import { FrownFill, GlobalOutline } from 'antd-mobile-icons';
 import store from '@/store/index.js';
-import {setUserExit} from '@/store/modules/user.js';
+import { setUserExit } from '@/store/modules/user.js';
+import { clearToken } from '@/utils/localStorage.js';
 
 const request = axios.create({
     baseURL: 'http://localhost:9210/xiachufang',
@@ -19,15 +20,22 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use((response) => {
     return response.data;
 }, (error) => {
+    console.log(error);
     let status = error.response.status;
     switch (status) {
         case 403:
             Toast.show({
-                content: '请登录或重新登录',
+                content: '您的身份信息失效了，请重新登录',
                 duration: 1000,
                 icon: <FrownFill />,
                 afterClose: () => {
-                    setUserExit();
+                    // 清除用户的信息
+                    clearToken()
+                    // 暂时不知道为什么不会调用，先手动拉起清理
+                    // setUserExit();
+                    // 认证过期，进行重定向到首页
+                    // 暂时直接跳转，这样做会导致页面重新刷新，后期考虑使用钩子实现
+                    window.location.href = '/';
                 }
             });
             break;
