@@ -1,3 +1,4 @@
+// 用户表和用户信息表进行关联
 const initUser = async (connection, userTable, userInfoTable) => {
     try {
         // 创建用户表

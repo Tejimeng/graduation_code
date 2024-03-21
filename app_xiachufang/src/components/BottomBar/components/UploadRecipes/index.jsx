@@ -77,7 +77,7 @@ const Index = ({ onClose }) => {
     };
     // 表单收集
     const formValue = (changedValues, allValues) => {
-        // console.log(changedValues);
+        console.log(changedValues);
         // console.log(getFieldValue('recipes_cover')?.length);
         // console.log(allValues);
     };
@@ -348,6 +348,15 @@ const Index = ({ onClose }) => {
                                     ))
                                 }
                             </Form.Array>
+                        </div>
+                        {/*小贴士*/}
+                        <div className='tips'>
+                            <div className='tips_title'>
+                                小贴士
+                            </div>
+                            <Form.Item name='recipeTip' className='recipes_tip'>
+                                <TextArea placeholder='做这道菜该注意什么呢' showCount />
+                            </Form.Item>
                         </div>
                     </div>
                 </Form>
