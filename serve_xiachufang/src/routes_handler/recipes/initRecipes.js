@@ -1,50 +1,72 @@
-const faker = require('faker');
-
-const insertRandomComments = async (connection, recipeId, recipesCommentTable) => {
-    for (let i = 0; i < 12; i++) {
-        const randomUserId = faker.datatype.number({ min: 1, max: 6 }); // 模拟随机用户ID
-        const randomComment = faker.lorem.sentence(); // 模拟随机评论内容
-        const randomCommentTime = faker.date.past().toISOString(); // 模拟随机评论时间
-
-        await connection.query(`
-            INSERT INTO ${recipesCommentTable} (id, commentTime, commentAuthor, commentDesc)
-            VALUES (?, ?, ?, ?)
-        `, [recipeId, randomCommentTime, randomUserId, randomComment]);
-    }
-};
-
-const initRecipes = async (connection, recipesTable, recipesCommentTable) => {
+const Chance = require('chance');
+const chance = new Chance();
+const initRecipes = async (connection, recipesTable) => {
     try {
-        // 创建食谱表
         await connection.query(`
             CREATE TABLE IF NOT EXISTS ${recipesTable} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                coverImg VARCHAR(255) NOT NULL DEFAULT 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
-                recipeTitle VARCHAR(255) NOT NULL DEFAULT '食谱标题test专用',
+                coverImg VARCHAR(255) NOT NULL,
+                recipeTitle VARCHAR(255) NOT NULL,
                 recipeStory TEXT,
-                recipeMaterials JSON NOT NULL DEFAULT '[{"materialName":"鸡蛋","materialDosage":"6个"},{"materialName":"鸡蛋","materialDosage":"6个"},{"materialName":"鸡蛋","materialDosage":"6个"}]',
-                recipeSteps JSON NOT NULL DEFAULT '[{"stepImg":"http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg","stepDesc":"这是步骤的描述"}]',
+                recipeMaterials JSON NOT NULL,
+                recipeSteps JSON NOT NULL,
                 goodCount INT DEFAULT 0,
-                collectionCount INT DEFAULT 0
+                collectionCount INT DEFAULT 0 ,
+                auditStatus INT DEFAULT 1,
+                recommendedStatus INT DEFAULT 1,
+                tips TEXT DEFAULT NULL,
+                createdAt BIGINT DEFAULT (UNIX_TIMESTAMP() * 1000)
             )
         `);
-
-        // 插入默认食谱数据
+        // 进行默认值的插入
+        const recipesData = [];
         for (let i = 0; i < 30; i++) {
-            const recipeTitle = faker.lorem.words(7); // 模拟随机食谱标题
-            await connection.query(`
-                INSERT INTO ${recipesTable} (recipeTitle) VALUES (?)
-            `, [recipeTitle]);
-
-            // 获取插入的食谱数据的 id
-            const [rows] = await connection.query('SELECT LAST_INSERT_ID() as id');
-            const recipeId = rows[0].id;
-
-            // 向食谱评论表插入随机评论数据
-            await insertRandomComments(connection, recipeId, recipesCommentTable);
+            const coverImg = 'http://localhost:9210/serverImage/2024/03/17/1710671059994.jpg';
+            const recipeTitle = chance.sentence({ words: 7 });
+            const recipeStory = chance.paragraph({ sentences: 3 });
+            const recipeMaterials = [
+                { materialName: '面粉', materialDosage: '200g' },
+                { materialName: '鸡蛋', materialDosage: '2个' },
+                { materialName: '面粉', materialDosage: '200g' },
+                { materialName: '鸡蛋', materialDosage: '2个' },
+                { materialName: '面粉', materialDosage: '200g' },
+                { materialName: '鸡蛋', materialDosage: '2个' }
+            ];
+            const recipeSteps = [
+                {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                },
+                {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                },
+                {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                },
+                {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                },
+                {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                }, {
+                    stepImg: 'http://localhost:9210/serverImage/2024/03/17/1710658756265.jpg',
+                    stepDesc: '这是步骤的描述'
+                }
+            ];
+            const tips = '这道菜谱很好完成，没有提示！';
+            recipesData.push([coverImg, recipeTitle, recipeStory, JSON.stringify(recipeMaterials), JSON.stringify(recipeSteps), tips]);
         }
 
-        console.log('Recipes table created, data inserted, and comments added successfully');
+        await connection.query(`
+   INSERT INTO ${recipesTable} (coverImg, recipeTitle, recipeStory, recipeMaterials, recipeSteps, tips) VALUES ?
+`, [recipesData]);
+
+
+        console.log('Recipes table created, data inserted');
     } catch (error) {
         console.error('Error creating recipes tables and inserting data:', error);
     }

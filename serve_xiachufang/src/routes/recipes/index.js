@@ -1,11 +1,13 @@
 const Router = require('koa-router');
 const index = new Router();
-const { login_verification_code, login_password } = require('../../constant/routes');
-const { loginVerificationCode, loginPassword } = require('../../routes_handler/login');
-// 收取验证码
-
-// 验证码登录
-index.post(login_verification_code, loginVerificationCode);
-// 密码登录
-index.post(login_password, loginPassword);
+const { all_recipes, recipes_by_page } = require('../../constant/routes');
+const {
+    getAllRecipes,
+    getRecipesByPage,
+    addRecipe,
+    deleteRecipe,
+    updateRecipe
+} = require('../../routes_handler/recipes');
+index.get(all_recipes, getAllRecipes);
+index.get(recipes_by_page, getRecipesByPage);
 module.exports = index;
