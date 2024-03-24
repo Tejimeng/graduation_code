@@ -9,7 +9,8 @@ const pool = mysql.createPool({
     database: dbConfig.database,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    multipleStatements: true // 允许执行多条SQL语句
 });
 const databaseMiddleware = async (ctx, next) => {
     let connection;

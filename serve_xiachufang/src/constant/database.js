@@ -9,6 +9,6 @@ const dbConfig = {
 // 表名
 const UserTable = 'user';// 用户表
 const UserInfoTable = 'userInfo';// 用户信息表
-const RecipesTable = 'recipes';// 用户表
+const RecipesTable = 'recipes';// 食谱表
 const RecipesCommentTable = 'recipesComment';// 用户信息表
 module.exports = { dbConfig, UserTable, UserInfoTable, RecipesTable, RecipesCommentTable };

@@ -1,4 +1,5 @@
 const Chance = require('chance');
+const { RecipesTable } = require('../../constant/database');
 const chance = new Chance();
 const initRecipes = async (connection, recipesTable) => {
     try {
@@ -15,12 +16,23 @@ const initRecipes = async (connection, recipesTable) => {
                 auditStatus INT DEFAULT 1,
                 recommendedStatus INT DEFAULT 1,
                 tips TEXT DEFAULT NULL,
-                createdAt BIGINT DEFAULT (UNIX_TIMESTAMP() * 1000)
+                createdAt BIGINT DEFAULT (UNIX_TIMESTAMP() * 1000),
+                founder INT NOT NULL,
+                FOREIGN KEY (founder) REFERENCES user(id)
             )
         `);
         // 进行默认值的插入
+        await insertRecipesDefaultValue(connection, RecipesTable);
+        console.log('Recipes table created, data inserted');
+    } catch (error) {
+        console.error('Error creating recipes tables and inserting data:', error);
+    }
+};
+const insertRecipesDefaultValue = async (connection, recipesTable) => {
+    try {
         const recipesData = [];
         for (let i = 0; i < 30; i++) {
+            const founderId = chance.integer({ min: 1, max: 6 }); // 模拟随机用户ID
             const coverImg = 'http://localhost:9210/serverImage/2024/03/17/1710671059994.jpg';
             const recipeTitle = chance.sentence({ words: 7 });
             const recipeStory = chance.paragraph({ sentences: 3 });
@@ -58,18 +70,15 @@ const initRecipes = async (connection, recipesTable) => {
                 }
             ];
             const tips = '这道菜谱很好完成，没有提示！';
-            recipesData.push([coverImg, recipeTitle, recipeStory, JSON.stringify(recipeMaterials), JSON.stringify(recipeSteps), tips]);
+            recipesData.push([coverImg, recipeTitle, recipeStory, JSON.stringify(recipeMaterials), JSON.stringify(recipeSteps), tips, founderId]);
         }
 
         await connection.query(`
-   INSERT INTO ${recipesTable} (coverImg, recipeTitle, recipeStory, recipeMaterials, recipeSteps, tips) VALUES ?
+   INSERT INTO ${recipesTable} (coverImg, recipeTitle, recipeStory, recipeMaterials, recipeSteps, tips,founder) VALUES ?
 `, [recipesData]);
-
-
-        console.log('Recipes table created, data inserted');
+        console.log('Recipes data inserted');
     } catch (error) {
-        console.error('Error creating recipes tables and inserting data:', error);
+        console.error('Error recipes tables inserting data:', error);
     }
 };
-
-module.exports = { initRecipes };
+module.exports = { initRecipes, insertRecipesDefaultValue };
